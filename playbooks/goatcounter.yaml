@@ -35,6 +35,8 @@
       notify:
         - daemon-reload
         - restart goatcounter
+    - name: flush handlers
+      meta: flush_handlers
     - name: ensure goatcounter is running
       become: true
       service:

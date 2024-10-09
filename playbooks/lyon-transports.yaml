@@ -9,6 +9,8 @@
       notify:
         - daemon-reload
         - restart lyon-transports
+    - name: flush handlers
+      meta: flush_handlers
     - name: ensure lyon-transports is running
       become: true
       service:
