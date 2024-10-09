@@ -1,7 +1,7 @@
 - name: lyon-transports
   hosts: servers
   tasks:
-    - name: write lyon-transports unit file
+    - name: write service file
       become: true
       template:
         src: ../templates/lyon-transports.service.j2
@@ -11,7 +11,7 @@
         - restart lyon-transports
     - name: flush handlers
       meta: flush_handlers
-    - name: ensure lyon-transports is running
+    - name: ensure service is running
       become: true
       service:
         name: lyon-transports
@@ -23,7 +23,7 @@
       become: true
       systemd:
         daemon_reload: true
-    - name: restart lyon-transports
+    - name: restart service
       become: true
       service:
         name: lyon-transports

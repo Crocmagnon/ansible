@@ -27,7 +27,7 @@
         src: "{{base_dir}}/goatcounter-{{release.tag}}"
         dest: "{{base_dir}}/goatcounter"
         state: link
-    - name: write goatcounter unit file
+    - name: write service unit file
       become: true
       template:
         src: ../templates/goatcounter.service.j2
@@ -37,7 +37,7 @@
         - restart goatcounter
     - name: flush handlers
       meta: flush_handlers
-    - name: ensure goatcounter is running
+    - name: ensure service is running
       become: true
       service:
         name: goatcounter
@@ -49,7 +49,7 @@
       become: true
       systemd:
         daemon_reload: true
-    - name: restart goatcounter
+    - name: restart service
       become: true
       service:
         name: goatcounter
