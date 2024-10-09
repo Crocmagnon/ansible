@@ -1,0 +1,15 @@
+- name: setup ansible python dependencies
+  hosts: servers
+  tasks:
+    - name: install system deps
+      become: true
+      apt:
+        pkg:
+          - python3-venv
+    - name: setup venv
+      shell: |
+        if [ -x /tmp/ansible/bin/python ]; then rm -rf /tmp/ansible; fi
+        /usr/bin/python3 -m venv /tmp/ansible
+        /tmp/ansible/bin/pip install --upgrade 'github3.py >= 1.0.0a3'
+      args:
+        executable: /bin/bash

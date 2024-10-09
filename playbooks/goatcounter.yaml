@@ -1,0 +1,67 @@
+- name: goatcounter
+  hosts: servers
+  tasks:
+    - name: get latest release
+      github_release:
+        action: latest_release
+        user: arp242
+        repo: goatcounter
+      register: release
+    - name: print release
+      ansible.builtin.debug:
+        var: release.tag
+    - name: download binary
+      get_url:
+        url: https://github.com/arp242/goatcounter/releases/download/{{release.tag}}/goatcounter-{{release.tag}}-linux-amd64.gz
+        dest: "{{base_dir}}/goatcounter-{{release.tag}}.gz"
+    - name: uncompress
+      command: gunzip {{base_dir}}/goatcounter-{{release.tag}}.gz
+      args:
+        creates: "{{base_dir}}/goatcounter-{{release.tag}}"
+    - name: make executable
+      file:
+        path: "{{base_dir}}/goatcounter-{{release.tag}}"
+        mode: '0775'
+    - name: symlink
+      file:
+        src: "{{base_dir}}/goatcounter-{{release.tag}}"
+        dest: "{{base_dir}}/goatcounter"
+        state: link
+    - name: write goatcounter unit file
+      become: true
+      template:
+        src: ../templates/goatcounter.service.j2
+        dest: /etc/systemd/system/goatcounter.service
+      notify:
+        - daemon-reload
+        - restart goatcounter
+    - name: ensure goatcounter is running
+      become: true
+      service:
+        name: goatcounter
+        state: started
+        enabled: true
+
+  handlers:
+    - name: daemon-reload
+      become: true
+      systemd:
+        daemon_reload: true
+    - name: restart goatcounter
+      become: true
+      service:
+        name: goatcounter
+        state: restarted
+
+  vars:
+    ansible_python_interpreter: /tmp/ansible/bin/python
+    base_dir: /mnt/data/goatcounter
+    gc_mailgun_api_key: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      31386237653033306338393237353961396535363061363931643863653461333631376365663338
+      3266346337353564656539666235656265356435343834380a616232383839663639616537393233
+      64303764306639636136346233366666633765393565353062396632636163643031616235303130
+      3662343162643033380a326161313036643835636562636165356464393236303533303435353365
+      36336163313338346235396565363631366564393562326536353262363637653432643830663532
+      30356133383335653330613965623261323531613131663437363430636565393262353565326132
+      323830313235313462633335333763363161
