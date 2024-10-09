@@ -1,0 +1,13 @@
+[Unit]
+Description=Lyon transports API
+After=network.target
+
+[Service]
+ExecStart=/mnt/data/lyon-transports/lyon-transports-linux-amd64 --host 0.0.0.0 -u {{ lyon_transports_username }} -p {{ lyon_transports_password }} --cors-allowed-origin https://display.augendre.info
+Type=simple
+Restart=always
+User=gaugendre
+Group=gaugendre
+
+[Install]
+WantedBy=default.target
