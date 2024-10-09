@@ -8,8 +8,11 @@
           - python3-venv
     - name: setup venv
       shell: |
-        if [ -x /tmp/ansible/bin/python ]; then rm -rf /tmp/ansible; fi
+        if [ -x /tmp/ansible/bin/python ]; then exit 123; fi
         /usr/bin/python3 -m venv /tmp/ansible
         /tmp/ansible/bin/pip install --upgrade 'github3.py >= 1.0.0a3'
       args:
         executable: /bin/bash
+      register: venv
+      changed_when: "venv.rc != 123"
+      failed_when: "venv.rc != 0 and venv.rc != 123"
