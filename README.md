@@ -11,5 +11,5 @@ ansible-playbook playbooks/dependencies/*.yaml
 
 ## run
 ```shell
-ansible-playbook playbooks/*.yaml
+ansible-playbook playbooks/apps/*.yaml
 ```

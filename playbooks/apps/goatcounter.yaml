@@ -30,7 +30,7 @@
     - name: write service unit file
       become: true
       template:
-        src: ../templates/goatcounter.service.j2
+        src: ../../templates/goatcounter.service.j2
         dest: /etc/systemd/system/goatcounter.service
       notify:
         - daemon-reload

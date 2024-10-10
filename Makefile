@@ -1,7 +1,7 @@
 .PHONY: dry-run
-dry-run:
-	ansible-playbook playbooks/*.yaml --check --diff
+apps-dry-run:
+	ansible-playbook playbooks/apps/*.yaml --check --diff
 
 .PHONY: run
-run:
-	ansible-playbook playbooks/*.yaml
+apps:
+	ansible-playbook playbooks/apps/*.yaml
