@@ -1,6 +1,7 @@
 ---
 - name: Setup ansible python dependencies
   hosts: servers
+  gather_facts: false
   tasks:
     - name: Install system deps
       become: true

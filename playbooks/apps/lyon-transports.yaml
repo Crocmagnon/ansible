@@ -1,6 +1,7 @@
 ---
 - name: Lyon-transports
   hosts: servers
+  gather_facts: false
   tasks:
     - name: Write service file
       become: true
@@ -13,7 +14,6 @@
       notify:
         - Reload daemon
         - Restart service
-      when: ansible_os_family != "" # <- Compares with an empty string.
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
     - name: Ensure service is running

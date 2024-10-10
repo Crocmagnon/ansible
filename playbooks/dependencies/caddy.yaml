@@ -1,6 +1,7 @@
 ---
 - name: Setup caddy
   hosts: servers
+  gather_facts: false
   become: true
   tasks:
     - name: Install system deps

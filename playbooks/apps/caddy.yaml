@@ -1,6 +1,7 @@
 ---
 - name: Update caddy config
   hosts: servers
+  gather_facts: false
   become: true
   tasks:
     - name: Write Caddyfile

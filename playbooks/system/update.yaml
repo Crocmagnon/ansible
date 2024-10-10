@@ -1,6 +1,7 @@
 ---
 - name: Update system
   hosts: servers
+  gather_facts: false
   become: true
   tasks:
     - name: Update packages

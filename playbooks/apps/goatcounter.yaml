@@ -1,6 +1,7 @@
 ---
 - name: Goatcounter
   hosts: servers
+  gather_facts: false
   tasks:
     - name: Get latest release
       community.general.github_release:
