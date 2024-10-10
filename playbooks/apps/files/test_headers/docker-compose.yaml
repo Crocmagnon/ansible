@@ -1,0 +1,8 @@
+services:
+  app:
+    image: python:3.13-slim
+    command: python /app/app.py
+    volumes:
+      - ./:/app
+    ports:
+      - "9008:8080"

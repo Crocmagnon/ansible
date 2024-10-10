@@ -1,0 +1,25 @@
+---
+- name: Setup test_headers
+  hosts: servers
+  gather_facts: false
+  tasks:
+    - name: Write app.py
+      ansible.builtin.copy:
+        src: files/test_headers/app.py
+        dest: "{{ dir }}/app.py"
+        mode: "0644"
+        owner: gaugendre
+        group: gaugendre
+    - name: Write docker-compose.yaml
+      ansible.builtin.copy:
+        src: files/test_headers/docker-compose.yaml
+        dest: "{{ dir }}/docker-compose.yaml"
+        mode: "0644"
+        owner: gaugendre
+        group: gaugendre
+    - name: Ensure service is started
+      community.docker.docker_compose_v2:
+        project_src: "{{ dir }}"
+        state: present
+  vars:
+    dir: /mnt/data/test_headers
