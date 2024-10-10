@@ -26,6 +26,26 @@
 # PUBLIC SERVICES
 #########################################################
 
+## Static config
+#########################################################
+
+static.augendre.info {
+	import common_headers
+	header * Cache-Control "max-age=300"
+	file_server * {
+		root /mnt/data/caddy/static
+		hide .*
+	}
+}
+
+augendre.info {
+	import common_headers
+	respond * 200
+}
+
+## Reverse proxies (ports 8000-8999)
+#########################################################
+
 charasheet.augendre.info {
 	import common_headers
 	route {
@@ -46,20 +66,6 @@ checkout.augendre.info {
 	}
 }
 
-static.augendre.info {
-	import common_headers
-	header * Cache-Control "max-age=300"
-	file_server * {
-		root /mnt/data/caddy/static
-		hide .*
-	}
-}
-
-gc.gabnotes.org, gc.augendre.info, static.gc.augendre.info, voyages.gc.coccomagnard.fr {
-	import common_headers
-	reverse_proxy localhost:8081
-}
-
 cloud.augendre.info {
 	import common_headers
 	route /push/* {
@@ -73,9 +79,9 @@ cloud.augendre.info {
 	reverse_proxy localhost:8003
 }
 
-tcl.augendre.info {
+gc.gabnotes.org, gc.augendre.info, static.gc.augendre.info, voyages.gc.coccomagnard.fr {
 	import common_headers
-	reverse_proxy localhost:8888
+	reverse_proxy localhost:8005
 }
 
 git.augendre.info {
@@ -108,6 +114,24 @@ bin.augendre.info, paste.augendre.info {
 	reverse_proxy localhost:8010
 }
 
+g4b.ovh {
+	import common_headers
+	reverse_proxy localhost:8011
+}
+
+manuels.augendre.info, fournitures.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8012
+}
+
+tcl.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8013
+}
+
+## Ghost blogs (ports >=2368)
+#########################################################
+
 gabnotes.org {
 	import common_headers
 	header * Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://*.gabnotes.org https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' https:; connect-src 'self' https://*.augendre.info https://unpkg.com https://*.gabnotes.org https://api.codapi.org; frame-ancestors https://*.augendre.info; base-uri 'self'; form-action 'self';"
@@ -133,20 +157,12 @@ voyages.coccomagnard.fr, voyages.augendre.info {
 	reverse_proxy localhost:2370
 }
 
-g4b.ovh {
-	import common_headers
-	reverse_proxy localhost:8011
-}
+#########################################################
+# PROXY TO EXTERNAL SERVICES
+#########################################################
 
-augendre.info {
-	import common_headers
-	respond * 200
-}
-
-manuels.augendre.info, fournitures.augendre.info {
-	import common_headers
-	reverse_proxy localhost:8012
-}
+## At home
+#########################################################
 
 hass.augendre.info {
 	import common_headers
@@ -154,8 +170,12 @@ hass.augendre.info {
 	reverse_proxy http://192.168.0.9:8123
 }
 
-#########################################################
-# PROXY TO EXTERNAL SERVICES
+prusalink.augendre.info {
+	import internal
+	reverse_proxy http://192.168.0.12
+}
+
+## Outside
 #########################################################
 
 autoconfig.augendre.info {
@@ -166,10 +186,9 @@ autoconfig.augendre.info {
 #########################################################
 # INTERNAL SERVICES
 #########################################################
-prusalink.augendre.info {
-	import internal
-	reverse_proxy http://192.168.0.12
-}
+
+## Static config
+#########################################################
 
 internal-static.augendre.info {
 	import common_headers
@@ -182,10 +201,13 @@ internal-static.augendre.info {
 	}
 }
 
+## Reverse proxies (ports 9000-9999)
+#########################################################
+
 portainer.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy https://localhost:8013 {
+	reverse_proxy https://localhost:9001 {
 		transport http {
 			tls_insecure_skip_verify
 		}
@@ -195,52 +217,52 @@ portainer.augendre.info {
 code.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8014
+	reverse_proxy localhost:9002
 }
 
+plex.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:9003
+}
 transmission.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8015
+	reverse_proxy localhost:9004
 }
 sonarr.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8016
+	reverse_proxy localhost:9005
 }
 prowlarr.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8017
+	reverse_proxy localhost:9006
 }
 radarr.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8018
-}
-plex.augendre.info {
-	import common_headers
-	import internal
-	reverse_proxy localhost:8019
+	reverse_proxy localhost:9007
 }
 
 test.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8020
+	reverse_proxy localhost:9008
 }
 
 nextcloud-kibana.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:8005
+	reverse_proxy localhost:9009
 }
 
 display.augendre.info {
 	import common_headers
 	import internal
 	header Content-Security-Policy "default-src 'self' https://*.augendre.info; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-ancestors https://*.augendre.info; connect-src 'self' https://*.augendre.info https://download.data.grandlyon.com"
-	reverse_proxy localhost:8021
+	reverse_proxy localhost:9010
 }
 
 #########################################################

@@ -3,8 +3,8 @@
   become: true
   tasks:
     - name: write Caddyfile
-      template:
-        src: ../../templates/Caddyfile.j2
+      copy:
+        src: ../../files/Caddyfile
         dest: /etc/caddy/Caddyfile
       notify:
         - reload caddy
