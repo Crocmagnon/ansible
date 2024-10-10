@@ -1,15 +1,19 @@
-- name: update caddy config
+---
+- name: Update caddy config
   hosts: servers
   become: true
   tasks:
-    - name: write Caddyfile
-      copy:
-        src: ../../files/Caddyfile
+    - name: Write Caddyfile
+      ansible.builtin.copy:
+        src: files/Caddyfile
         dest: /etc/caddy/Caddyfile
+        mode: "0644"
+        owner: root
+        group: root
       notify:
-        - reload caddy
+        - Reload caddy
   handlers:
-    - name: reload caddy
-      service:
+    - name: Reload caddy
+      ansible.builtin.service:
         name: caddy
         state: reloaded

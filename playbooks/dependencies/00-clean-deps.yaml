@@ -1,7 +1,8 @@
-- name: clean ansible venv
+---
+- name: Clean ansible venv
   hosts: servers
   tasks:
-    - name: remove virtualenv
-      file:
+    - name: Remove virtualenv
+      ansible.builtin.file:
         path: /tmp/ansible
         state: absent

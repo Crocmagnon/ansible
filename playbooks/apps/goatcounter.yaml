@@ -1,57 +1,64 @@
-- name: goatcounter
+---
+- name: Goatcounter
   hosts: servers
   tasks:
-    - name: get latest release
-      github_release:
+    - name: Get latest release
+      community.general.github_release:
         action: latest_release
         user: arp242
         repo: goatcounter
       register: release
-    - name: print release
+    - name: Print release
       ansible.builtin.debug:
         var: release.tag
-    - name: download binary
-      get_url:
-        url: https://github.com/arp242/goatcounter/releases/download/{{release.tag}}/goatcounter-{{release.tag}}-linux-amd64.gz
-        dest: "{{base_dir}}/goatcounter-{{release.tag}}.gz"
-    - name: uncompress
-      command: gunzip {{base_dir}}/goatcounter-{{release.tag}}.gz
+    - name: Download binary
+      ansible.builtin.get_url:
+        url: https://github.com/arp242/goatcounter/releases/download/{{ release.tag }}/goatcounter-{{ release.tag }}-linux-amd64.gz
+        dest: "{{ base_dir }}/goatcounter-{{ release.tag }}.gz"
+        mode: "0644"
+        owner: gaugendre
+        group: gaugendre
+    - name: Uncompress
+      ansible.builtin.command: gunzip {{ base_dir }}/goatcounter-{{ release.tag }}.gz
       args:
-        creates: "{{base_dir}}/goatcounter-{{release.tag}}"
-    - name: make executable
-      file:
-        path: "{{base_dir}}/goatcounter-{{release.tag}}"
-        mode: '0775'
-    - name: symlink
-      file:
-        src: "{{base_dir}}/goatcounter-{{release.tag}}"
-        dest: "{{base_dir}}/goatcounter"
+        creates: "{{ base_dir }}/goatcounter-{{ release.tag }}"
+    - name: Make executable
+      ansible.builtin.file:
+        path: "{{ base_dir }}/goatcounter-{{ release.tag }}"
+        mode: "0775"
+    - name: Symlink
+      ansible.builtin.file:
+        src: "{{ base_dir }}/goatcounter-{{ release.tag }}"
+        dest: "{{ base_dir }}/goatcounter"
         state: link
-    - name: write service unit file
+    - name: Write service unit file
       become: true
-      template:
-        src: ../../templates/goatcounter.service.j2
+      ansible.builtin.template:
+        src: templates/goatcounter.service.j2
         dest: /etc/systemd/system/goatcounter.service
+        mode: "0644"
+        owner: root
+        group: root
       notify:
-        - daemon-reload
-        - restart service
-    - name: flush handlers
-      meta: flush_handlers
-    - name: ensure service is running
+        - Daemon-reload
+        - Restart service
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+    - name: Ensure service is running
       become: true
-      service:
+      ansible.builtin.service:
         name: goatcounter
         state: started
         enabled: true
 
   handlers:
-    - name: daemon-reload
+    - name: Daemon-reload
       become: true
-      systemd:
+      ansible.builtin.systemd:
         daemon_reload: true
-    - name: restart service
+    - name: Restart service
       become: true
-      service:
+      ansible.builtin.service:
         name: goatcounter
         state: restarted
 
