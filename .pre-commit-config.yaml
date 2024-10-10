@@ -4,6 +4,7 @@ ci:
   skip:
     # build of https://github.com/ansible/ansible-lint:ansible@v24.9.2 for python@python3 exceeds tier max size 250MiB: 405.6MiB
     - ansible-lint
+    - ggshield
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -32,3 +33,7 @@ repos:
         entry: python3 -m ansiblelint -v --force-color --fix
         additional_dependencies:
           - ansible # necessary because we're using community collections
+  - repo: https://github.com/gitguardian/ggshield
+    rev: v1.32.1
+    hooks:
+      - id: ggshield
