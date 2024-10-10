@@ -1,0 +1,34 @@
+- name: setup caddy
+  hosts: servers
+  become: true
+  tasks:
+    - name: install system deps
+      apt:
+        pkg:
+          - debian-keyring
+          - debian-archive-keyring
+          - apt-transport-https
+          - gnupg2
+          - curl
+        state: present
+    - name: Add caddy repository
+      ansible.builtin.deb822_repository:
+        name: caddy
+        uris: "https://dl.cloudsmith.io/public/caddy/stable/deb/debian"
+        signed_by: "https://dl.cloudsmith.io/public/caddy/stable/gpg.key"
+        components: "main"
+        suites: "any-version"
+        types: ["deb"]
+        state: present
+        enabled: true
+    - name: install caddy
+      apt:
+        update_cache: true
+        name: caddy
+        state: present
+      notify: restart caddy
+  handlers:
+    - name: restart caddy
+      service:
+        name: caddy
+        state: restarted

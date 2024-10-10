@@ -1,0 +1,272 @@
+{
+	email gabriel@augendre.info
+	http_port 80
+	https_port 443
+}
+
+(common_headers) {
+	header * -Server
+	header * -X-Powered-By
+	header * Permissions-Policy interest-cohort=()
+	header * ?Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	header * ?Referrer-Policy "strict-origin-when-cross-origin"
+	header * ?X-Content-Type-Options "nosniff"
+	header * ?X-Frame-Options "DENY"
+	header * ?X-XSS-Protection "1; mode=block"
+}
+
+(internal) {
+	@blocked not client_ip private_ranges 2a01:e0a:325:a1c0::/64
+	respond @blocked "Access denied" 403 {
+		close
+	}
+}
+
+#########################################################
+# PUBLIC SERVICES
+#########################################################
+
+charasheet.augendre.info {
+	import common_headers
+	route {
+		file_server /media/* {
+			root /mnt/data/charasheet/data
+		}
+		reverse_proxy localhost:8001
+	}
+}
+
+checkout.augendre.info {
+	import common_headers
+	route {
+		file_server /media/* {
+			root /mnt/data/checkout
+		}
+		reverse_proxy localhost:8002
+	}
+}
+
+static.augendre.info {
+	import common_headers
+	header * Cache-Control "max-age=300"
+	file_server * {
+		root /mnt/data/caddy/static
+		hide .*
+	}
+}
+
+gc.gabnotes.org, gc.augendre.info, static.gc.augendre.info, voyages.gc.coccomagnard.fr {
+	import common_headers
+	reverse_proxy localhost:8081
+}
+
+cloud.augendre.info {
+	import common_headers
+	route /push/* {
+		uri strip_prefix /push
+		reverse_proxy localhost:8004
+	}
+	# rewrite to suppress carddav/caldav warning
+	# in nextcloud settings
+	rewrite /.well-known/carddav /remote.php/dav/
+	rewrite /.well-known/caldav /remote.php/dav/
+	reverse_proxy localhost:8003
+}
+
+tcl.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8888
+}
+
+git.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8006
+}
+
+office.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8007
+}
+
+reader.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8008
+}
+
+wallabag.augendre.info {
+	import common_headers
+	header * ?Content-Security-Policy "default-src 'none'; img-src * data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; manifest-src 'self'"
+	reverse_proxy localhost:8009
+}
+
+bin.augendre.info, paste.augendre.info {
+	import common_headers
+	@bot header User-Agent PrivateBinDirectoryBot*
+	respond @bot "Access denied" 403 {
+		close
+	}
+	reverse_proxy localhost:8010
+}
+
+gabnotes.org {
+	import common_headers
+	header * Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://*.gabnotes.org https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' https:; connect-src 'self' https://*.augendre.info https://unpkg.com https://*.gabnotes.org https://api.codapi.org; frame-ancestors https://*.augendre.info; base-uri 'self'; form-action 'self';"
+
+	reverse_proxy localhost:2368
+}
+ghost.augendre.info {
+	import common_headers
+	redir / /ghost/
+
+    reverse_proxy localhost:2368
+}
+
+voyages-lois.augendre.info {
+	import common_headers
+	header * X-Frame-Options "SAMEORIGIN"
+	reverse_proxy localhost:2369
+}
+
+voyages.coccomagnard.fr, voyages.augendre.info {
+	import common_headers
+	header * X-Frame-Options "SAMEORIGIN"
+	reverse_proxy localhost:2370
+}
+
+g4b.ovh {
+	import common_headers
+	reverse_proxy localhost:8011
+}
+
+augendre.info {
+	import common_headers
+	respond * 200
+}
+
+manuels.augendre.info, fournitures.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8012
+}
+
+hass.augendre.info {
+	import common_headers
+	header * X-Frame-Options "SAMEORIGIN"
+	reverse_proxy http://192.168.0.9:8123
+}
+
+#########################################################
+# PROXY TO EXTERNAL SERVICES
+#########################################################
+
+autoconfig.augendre.info {
+	import common_headers
+	reverse_proxy https://autoconfig.migadu.com
+}
+
+#########################################################
+# INTERNAL SERVICES
+#########################################################
+prusalink.augendre.info {
+	import internal
+	reverse_proxy http://192.168.0.12
+}
+
+internal-static.augendre.info {
+	import common_headers
+	import internal
+	header * Cache-Control "max-age=300"
+	file_server * {
+		root /mnt/data/caddy/internal-static
+		hide .*
+		browse
+	}
+}
+
+portainer.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy https://localhost:8013 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+code.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8014
+}
+
+transmission.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8015
+}
+sonarr.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8016
+}
+prowlarr.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8017
+}
+radarr.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8018
+}
+plex.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8019
+}
+
+test.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8020
+}
+
+nextcloud-kibana.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:8005
+}
+
+display.augendre.info {
+	import common_headers
+	import internal
+	header Content-Security-Policy "default-src 'self' https://*.augendre.info; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-ancestors https://*.augendre.info; connect-src 'self' https://*.augendre.info https://download.data.grandlyon.com"
+	reverse_proxy localhost:8021
+}
+
+#########################################################
+# REDIRECTS
+#########################################################
+mariage.augendre.info {
+	import common_headers
+	redir https://cloud.augendre.info/s/65JgH8fzz2CyJZ3
+}
+
+mail.augendre.info {
+	import common_headers
+	redir https://webmail.migadu.com permanent
+}
+
+cv-gabriel.augendre.info {
+	import common_headers
+	redir https://cloud.augendre.info/s/FHGJkc2DzJECY64/download permanent
+}
+
+blog.augendre.info gabriel.augendre.info www.gabnotes.org {
+	import common_headers
+	redir https://gabnotes.org{uri} permanent
+}
+
+qrcode.augendre.info qr.augendre.info {
+	import common_headers
+	redir https://static.augendre.info/qrcode-web/
+}
