@@ -6,3 +6,5 @@ services:
       - ./:/app
     ports:
       - "9008:8080"
+    init: true
+    tty: true
