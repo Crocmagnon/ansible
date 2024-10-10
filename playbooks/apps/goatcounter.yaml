@@ -34,7 +34,7 @@
         dest: /etc/systemd/system/goatcounter.service
       notify:
         - daemon-reload
-        - restart goatcounter
+        - restart service
     - name: flush handlers
       meta: flush_handlers
     - name: ensure service is running

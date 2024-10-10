@@ -8,7 +8,7 @@
         dest: /etc/systemd/system/lyon-transports.service
       notify:
         - daemon-reload
-        - restart lyon-transports
+        - restart service
     - name: flush handlers
       meta: flush_handlers
     - name: ensure service is running
