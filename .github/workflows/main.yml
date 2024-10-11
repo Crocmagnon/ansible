@@ -18,8 +18,6 @@ jobs:
           cache: pip
           # Set this option if you want the action to check for the latest available version that satisfies the version spec.
           check-latest: true
-      - name: Install ansible
-        run: pip install ansible
       - name: Run ansible
         run: |
           export KEY_FILE=$(mktemp)
