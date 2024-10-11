@@ -8,7 +8,7 @@
         chdir: /mnt/data/gabnotes.org
         cmd: ghost update
       register: gabnotes_async
-      changed_when: true
+      changed_when: false
       async: 300
       poll: 0
     - name: Start update on voyages-lois.augendre.info
@@ -16,7 +16,7 @@
         chdir: /mnt/data/voyages-lois.augendre.info
         cmd: ghost update
       register: voyages_lois_async
-      changed_when: true
+      changed_when: false
       async: 300
       poll: 0
     - name: Start update on voyages.coccomagnard.fr
@@ -24,7 +24,7 @@
         chdir: /mnt/data/voyages.coccomagnard.fr
         cmd: ghost update
       register: voyages_coccomagnard_async
-      changed_when: true
+      changed_when: false
       async: 300
       poll: 0
     - name: Check gabnotes.org
