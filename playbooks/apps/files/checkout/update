@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euxo pipefail
+pushd /mnt/data/checkout
+docker compose --ansi never pull --quiet
+docker compose --ansi never up -d
+docker compose exec django python manage.py migrate
+docker compose exec django python manage.py refresh_cache
+popd
+docker image prune -f

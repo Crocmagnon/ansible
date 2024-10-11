@@ -1,0 +1,14 @@
+services:
+  django:
+    image: crocmagnon/checkout:latest
+    env_file:
+      - .env
+    volumes:
+      - ./db:/app/db
+      - ./media:/app/media
+    ports:
+      - "8002:8000"
+    restart: always
+    init: true
+    tty: true
+    mem_limit: 512m
