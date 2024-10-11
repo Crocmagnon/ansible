@@ -1,0 +1,15 @@
+services:
+  django:
+    image: crocmagnon/charasheet:latest
+    env_file:
+      - .env
+    volumes:
+      - ./db:/app/db
+      - ./data:/app/data
+    ports:
+      - "8001:8000"
+    user: 1000:1000
+    restart: always
+    init: true
+    tty: true
+    mem_limit: 512m

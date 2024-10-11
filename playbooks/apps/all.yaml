@@ -1,6 +1,7 @@
 ---
 - import_playbook: bin.yaml # noqa: name[play]
 - import_playbook: caddy.yaml # noqa: name[play]
+- import_playbook: charasheet.yaml # noqa: name[play]
 - import_playbook: ghost-update.yaml # noqa: name[play]
 - import_playbook: gitea.yaml # noqa: name[play]
 - import_playbook: goatcounter.yaml # noqa: name[play]

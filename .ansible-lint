@@ -3,5 +3,6 @@ profile: production
 strict: true
 exclude_paths:
   - "**/*docker-compose.yaml"
+  - "**/*docker-compose.yml"
   - .github/
   - .pre-commit-config.yaml
