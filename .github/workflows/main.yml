@@ -9,6 +9,7 @@ jobs:
     name: run ansible
     runs-on: ubuntu-latest
     steps:
+      - run: ls -al
       - name: Setup Python
         uses: actions/setup-python@v5.2.0
         with:
