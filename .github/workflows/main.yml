@@ -27,8 +27,10 @@ jobs:
           DEPLOY_USERNAME: ${{ secrets.DEPLOY_USERNAME }}
           ANSIBLE_INVENTORY: inventories/github.yaml
           ANSIBLE_VAULT_PASSWORD_FILE: vault.pass
+          ANSIBLE_FORCE_COLOR: "true"
         run: |
           echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > $ANSIBLE_VAULT_PASSWORD_FILE
+          ls $ANSIBLE_VAULT_PASSWORD_FILE
           export KEY_FILE=$(mktemp)
           echo "${{ secrets.DEPLOY_KEY }}" > $KEY_FILE
           ansible-playbook playbooks/all.yaml --check --diff
