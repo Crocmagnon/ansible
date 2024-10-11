@@ -1,0 +1,6 @@
+---
+servers:
+  hosts:
+    ubuntu:
+      ansible_host: 192.168.0.6
+      ansible_python_interpreter: auto_silent
