@@ -1,0 +1,33 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  ansible:
+    name: run ansible
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5.2.0
+        with:
+          python-version: 3
+          cache: pip
+          check-latest: true
+      - name: Run ansible
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USERNAME: ${{ secrets.DEPLOY_USERNAME }}
+          ANSIBLE_INVENTORY: inventories/github.yaml
+          ANSIBLE_VAULT_PASSWORD_FILE: vault.pass
+          ANSIBLE_FORCE_COLOR: "true"
+        run: |
+          echo '${{ secrets.ANSIBLE_VAULT_PASSWORD }}' > $ANSIBLE_VAULT_PASSWORD_FILE
+          ls $ANSIBLE_VAULT_PASSWORD_FILE
+          export KEY_FILE=$(mktemp)
+          echo "${{ secrets.DEPLOY_KEY }}" > $KEY_FILE
+          ansible-playbook playbooks/all.yaml
