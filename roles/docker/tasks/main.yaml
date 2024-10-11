@@ -24,6 +24,8 @@
     - templates/{{ docker_app_name }}/.*.j2
   notify:
     - Restart service
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
 - name: Ensure service is started
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
