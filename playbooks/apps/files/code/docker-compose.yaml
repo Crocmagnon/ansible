@@ -1,0 +1,11 @@
+services:
+  code:
+    image: ghcr.io/linuxserver/code-server
+    env_file: code.env
+    restart: always
+    volumes:
+      - ./code_data:/config
+    mem_limit: 3g
+    cpus: 3
+    ports:
+      - "9002:8443"

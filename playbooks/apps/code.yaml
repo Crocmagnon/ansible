@@ -1,0 +1,52 @@
+---
+- name: Visual Studio Code
+  hosts: servers
+  gather_facts: false
+  tasks:
+    - name: Create dir
+      ansible.builtin.file:
+        path: "{{ dir }}"
+        state: directory
+        mode: "0775"
+    - name: Write files
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "{{ dir }}/"
+        mode: preserve
+      with_fileglob:
+        - files/{{ app_name }}/*
+        - files/{{ app_name }}/.*
+      notify:
+        - Restart service
+    - name: Write templates
+      ansible.builtin.template:
+        src: "{{ item }}"
+        dest: "{{ dir }}/{{ item | basename | regex_replace('\\.j2$', '') }}"
+        mode: preserve
+      with_fileglob:
+        - templates/{{ app_name }}/*.j2
+        - templates/{{ app_name }}/.*.j2
+      notify:
+        - Restart service
+    - name: Ensure service is started
+      community.docker.docker_compose_v2:
+        project_src: "{{ dir }}"
+        state: present
+
+  handlers:
+    - name: Restart service
+      community.docker.docker_compose_v2:
+        project_src: "{{ dir }}"
+        state: restarted
+
+  vars:
+    app_name: code
+    dir: /mnt/data/{{ app_name }}
+    password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      65333933333436616332666161653932633431333334636364346239346530336337303939643435
+      3935336230623135343638646130313936363034396665650a653066313862326632333130656164
+      38346631366162393833333361633663636362653530666466376162643534303866363261373033
+      6339303930656638660a626635313736663065373535613132326531343737396662626434373039
+      38646136383662346264613534373663326136393361323933383062346336346264643731303333
+      6132373439346165313066353334353532393262346435306134
