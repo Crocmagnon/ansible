@@ -15,22 +15,22 @@
     - name: Download binary
       ansible.builtin.get_url:
         url: https://github.com/arp242/goatcounter/releases/download/{{ release.tag }}/goatcounter-{{ release.tag }}-linux-amd64.gz
-        dest: "{{ base_dir }}/goatcounter-{{ release.tag }}.gz"
+        dest: "{{ dir }}/goatcounter-{{ release.tag }}.gz"
         mode: "0644"
         owner: gaugendre
         group: gaugendre
     - name: Uncompress
-      ansible.builtin.command: gunzip {{ base_dir }}/goatcounter-{{ release.tag }}.gz
+      ansible.builtin.command: gunzip {{ dir }}/goatcounter-{{ release.tag }}.gz
       args:
-        creates: "{{ base_dir }}/goatcounter-{{ release.tag }}"
+        creates: "{{ dir }}/goatcounter-{{ release.tag }}"
     - name: Make executable
       ansible.builtin.file:
-        path: "{{ base_dir }}/goatcounter-{{ release.tag }}"
+        path: "{{ dir }}/goatcounter-{{ release.tag }}"
         mode: "0775"
     - name: Symlink
       ansible.builtin.file:
-        src: "{{ base_dir }}/goatcounter-{{ release.tag }}"
-        dest: "{{ base_dir }}/goatcounter"
+        src: "{{ dir }}/goatcounter-{{ release.tag }}"
+        dest: "{{ dir }}/goatcounter"
         state: link
     - name: Write service unit file
       become: true
@@ -65,7 +65,7 @@
 
   vars:
     ansible_python_interpreter: /tmp/ansible/bin/python
-    base_dir: /mnt/data/goatcounter
+    dir: /mnt/data/goatcounter
     gc_mailgun_api_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       31386237653033306338393237353961396535363061363931643863653461333631376365663338
