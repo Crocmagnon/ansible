@@ -33,4 +33,4 @@ jobs:
           ls $ANSIBLE_VAULT_PASSWORD_FILE
           export KEY_FILE=$(mktemp)
           echo "${{ secrets.DEPLOY_KEY }}" > $KEY_FILE
-          ansible-playbook playbooks/all.yaml --check --diff
+          ansible-playbook playbooks/all.yaml
