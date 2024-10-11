@@ -23,6 +23,7 @@ jobs:
           ANSIBLE_INVENTORY: inventories/github.yaml
           ANSIBLE_VAULT_PASSWORD_FILE: vault.pass
           ANSIBLE_FORCE_COLOR: "true"
+          ANSIBLE_ROLES_PATH: "./roles"
         run: |
           echo '${{ secrets.ANSIBLE_VAULT_PASSWORD }}' > $ANSIBLE_VAULT_PASSWORD_FILE
           ls $ANSIBLE_VAULT_PASSWORD_FILE

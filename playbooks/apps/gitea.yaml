@@ -1,23 +1,11 @@
 ---
-- name: Setup gitea
+- name: Gitea
   hosts: servers
   gather_facts: false
   tasks:
-    - name: Create dir
-      ansible.builtin.file:
-        path: "{{ dir }}"
-        state: directory
-        mode: "0775"
-    - name: Write env file
-      ansible.builtin.copy:
-        src: files/gitea/gitea.env
-        dest: "{{ dir }}/gitea.env"
-        mode: "0644"
-    - name: Write docker-compose.yaml
-      ansible.builtin.copy:
-        src: files/gitea/docker-compose.yaml
-        dest: "{{ dir }}/docker-compose.yaml"
-        mode: "0644"
+    - name: Docker
+      ansible.builtin.include_role:
+        name: docker
     - name: Write app.ini
       ansible.builtin.template:
         src: templates/gitea_app.ini.j2
@@ -25,19 +13,10 @@
         mode: "0600"
       notify:
         - Restart service
-    - name: Ensure service is started
-      community.docker.docker_compose_v2:
-        project_src: "{{ dir }}"
-        state: present
-
-  handlers:
-    - name: Restart service
-      community.docker.docker_compose_v2:
-        project_src: "{{ dir }}"
-        state: restarted
 
   vars:
-    dir: /mnt/data/git
+    docker_app_name: git
+    dir: /mnt/data/{{ docker_app_name }}
     lfs_jwt_secret: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       34656631616165623233353835386162343837363230366136303764613334323262313233616462

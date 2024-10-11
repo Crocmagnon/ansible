@@ -1,3 +1,4 @@
 [env]
 ANSIBLE_INVENTORY = "{{config_root}}/inventories/local.yaml"
 ANSIBLE_VAULT_PASSWORD_FILE = "{{config_root}}/vault.pass"
+ANSIBLE_ROLES_PATH = "{{config_root}}/roles"
