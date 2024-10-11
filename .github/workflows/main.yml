@@ -29,7 +29,7 @@ jobs:
           ANSIBLE_VAULT_PASSWORD_FILE: vault.pass
           ANSIBLE_FORCE_COLOR: "true"
         run: |
-          echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}" > $ANSIBLE_VAULT_PASSWORD_FILE
+          echo '${{ secrets.ANSIBLE_VAULT_PASSWORD }}' > $ANSIBLE_VAULT_PASSWORD_FILE
           ls $ANSIBLE_VAULT_PASSWORD_FILE
           export KEY_FILE=$(mktemp)
           echo "${{ secrets.DEPLOY_KEY }}" > $KEY_FILE
