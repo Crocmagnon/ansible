@@ -17,8 +17,6 @@
         url: https://github.com/arp242/goatcounter/releases/download/{{ release.tag }}/goatcounter-{{ release.tag }}-linux-amd64.gz
         dest: "{{ dir }}/goatcounter-{{ release.tag }}.gz"
         mode: "0644"
-        owner: gaugendre
-        group: gaugendre
     - name: Uncompress
       ansible.builtin.command: gunzip {{ dir }}/goatcounter-{{ release.tag }}.gz
       args:
@@ -26,7 +24,7 @@
     - name: Make executable
       ansible.builtin.file:
         path: "{{ dir }}/goatcounter-{{ release.tag }}"
-        mode: "0775"
+        mode: "0755"
     - name: Symlink
       ansible.builtin.file:
         src: "{{ dir }}/goatcounter-{{ release.tag }}"
@@ -37,7 +35,7 @@
       ansible.builtin.template:
         src: templates/goatcounter.service.j2
         dest: /etc/systemd/system/goatcounter.service
-        mode: "0644"
+        mode: "0600"
         owner: root
         group: root
       notify:
