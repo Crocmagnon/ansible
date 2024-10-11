@@ -1,0 +1,24 @@
+services:
+  django:
+    image: crocmagnon/manuels-scolaires:latest
+    env_file:
+      - .env
+    volumes:
+      - ./media:/app/media
+    depends_on:
+      - db
+    restart: always
+    init: true
+    tty: true
+    mem_limit: 512m
+    ports:
+      - "8012:8000"
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "{{ pg_password }}"
+      POSTGRES_USER: "manuels"
+      POSTGRES_DB: "manuels"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data

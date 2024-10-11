@@ -3,7 +3,8 @@
   hosts: servers
   gather_facts: false
   tasks:
-    - include_role:
+    - name: Docker
+      ansible.builtin.include_role:
         name: docker
 
   vars:
