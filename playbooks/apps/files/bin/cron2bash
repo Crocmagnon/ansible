@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+script_name=$1
+cp .template $script_name
+chmod +x $script_name
+shift
+echo "$@" >> $script_name
+echo $(realpath $script_name)

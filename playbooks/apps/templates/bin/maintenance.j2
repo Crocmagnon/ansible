@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+
+# https://api.hetrixtools.com/v2/<API_TOKEN>/maintenance/<UPTIME_MONITOR_ID>/<MAINTENANCE_MODE>/
+# Modify the maintenance status of any of your Uptime Monitors.
+# <API_TOKEN> - Your API Access Token, in your particular case it's: {{ hetrixtools_token }}
+# <UPTIME_MONITOR_ID> - You can find the ID of any of your Uptime Monitors by using the API Call 'v1 List Uptime Monitors', it is listed for every uptime monitor as 'ID'
+# <MAINTENANCE_MODE> - The type of maintenance. Accepted values (numbers): 1, 2, or 3.
+# 1 - no maintenance mode (normal) - use this to exit maintenance mode
+# 2 - maintenance mode with notifications
+# 3 - maintenance mode without notifications
+
+API_TOKEN="{{ hetrixtools_token }}"
+mode=$1
+if [ "$mode" == "on" ]; then
+    mode=3
+elif [ "$mode" == "off" ]; then
+    mode=1
+else
+    echo "usage $0 <on|off>"
+    exit 1
+fi
+
+ids=$(curl -sSL https://api.hetrixtools.com/v1/$API_TOKEN/uptime/monitors/0/5000/ | jq -r '.[0][] | .ID')
+
+for id in $ids; do
+    curl -sSL https://api.hetrixtools.com/v2/$API_TOKEN/maintenance/$id/$mode/ > /dev/null
+done
+
+echo "Done"

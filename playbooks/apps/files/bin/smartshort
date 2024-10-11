@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/usr/sbin/smartctl -t short /dev/sda
+/usr/sbin/smartctl -t short /dev/sdb
+/usr/sbin/smartctl -t short /dev/sdc
+/usr/sbin/smartctl -t short /dev/sdd

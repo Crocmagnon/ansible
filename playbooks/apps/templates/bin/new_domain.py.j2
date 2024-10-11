@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+
+import ovh
+
+# Instantiate an OVH Client.
+# You can generate new credentials with full access to your account on
+# the token creation page (https://api.ovh.com/createToken/index.cgi?GET=/*&PUT=/*&POST=/*&DELETE=/*)
+# List of available endpoints: https://github.com/ovh/python-ovh#2-configure-your-application
+client = ovh.Client(
+	endpoint='ovh-eu',
+	application_key='{{ ovh_app_key }}',
+	application_secret='{{ ovh_app_secret }}',
+	consumer_key='{{ ovh_consumer_key }}',
+)
+
+if len(sys.argv) != 2:
+    print(f"usage: {sys.argv[0]} <subdomain>")
+    print(f"example: {sys.argv[0]} testing")
+    print("no need to include '.augendre.info'")
+    sys.exit(1)
+
+subdomain = sys.argv[1].removesuffix(".augendre.info")
+res = client.get("/domain/zone/augendre.info/record", fieldType="CNAME", subDomain=subdomain)
+if len(res) > 0:
+    print("CNAME already exists")
+    sys.exit(0)
+
+print("creating domain:")
+res = client.post("/domain/zone/augendre.info/record",
+	fieldType="CNAME",
+	subDomain=subdomain,
+	target="nginx.augendre.info.",
+	ttl=86400,
+)
+print(json.dumps(res, indent=4))
+
+print("refreshing zone:")
+res = client.post("/domain/zone/augendre.info/refresh")
+print(json.dumps(res, indent=4))
