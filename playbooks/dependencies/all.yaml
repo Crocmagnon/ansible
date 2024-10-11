@@ -1,0 +1,4 @@
+---
+# intentionally leaving 00-clean-deps to prevent re-creating the venv every time
+- import_playbook: 01-setup-deps.yaml # noqa: name[play]
+- import_playbook: caddy.yaml # noqa: name[play]
