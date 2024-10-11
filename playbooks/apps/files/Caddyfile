@@ -142,7 +142,7 @@ ghost.augendre.info {
 	import common_headers
 	redir / /ghost/
 
-    reverse_proxy localhost:2368
+	reverse_proxy localhost:2368
 }
 
 voyages-lois.augendre.info {

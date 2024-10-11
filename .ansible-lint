@@ -4,3 +4,4 @@ strict: true
 exclude_paths:
   - "**/*docker-compose.yaml"
   - .github/
+  - .pre-commit-config.yaml

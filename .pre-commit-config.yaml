@@ -5,6 +5,7 @@ ci:
     # build of https://github.com/ansible/ansible-lint:ansible@v24.9.2 for python@python3 exceeds tier max size 250MiB: 405.6MiB
     - ansible-lint
     - ggshield
+    - caddy-fmt
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -37,3 +38,10 @@ repos:
     rev: v1.32.1
     hooks:
       - id: ggshield
+  - repo: local
+    hooks:
+      - id: caddy-fmt
+        name: caddy fmt
+        language: system
+        entry: caddy fmt --overwrite
+        files: Caddyfile
