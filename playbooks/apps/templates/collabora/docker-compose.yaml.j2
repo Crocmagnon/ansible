@@ -1,0 +1,14 @@
+services:
+  code:
+    image: collabora/code
+    restart: always
+    environment:
+      server_name: 'cloud.augendre.info'
+      aliasgroup1: 'https://cloud.augendre.info:443'
+      DONT_GEN_SSL_CERT: '1'
+      username: admin
+      password: "{{password}}"
+      extra_params: '--o:ssl.enable=false --o:ssl.termination=true'
+    mem_limit: 2g
+    ports:
+      - "8007:9980"
