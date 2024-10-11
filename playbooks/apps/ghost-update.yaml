@@ -3,14 +3,13 @@
   hosts: servers
   gather_facts: false
   tasks:
-    - name: Start update on gabnotes.org
+    # Run the first task synchronously to download dependencies.
+    - name: Update gabnotes.org
       ansible.builtin.command:
         chdir: /mnt/data/gabnotes.org
         cmd: ghost update
-      register: gabnotes_async
-      changed_when: false
-      async: 300
-      poll: 0
+      register: gabnotes
+      changed_when: '"Restarting Ghost" in gabnotes.stdout'
     - name: Start update on voyages-lois.augendre.info
       ansible.builtin.command:
         chdir: /mnt/data/voyages-lois.augendre.info
@@ -27,14 +26,6 @@
       changed_when: false
       async: 300
       poll: 0
-    - name: Check gabnotes.org
-      ansible.builtin.async_status:
-        jid: "{{ gabnotes_async.ansible_job_id }}"
-      register: gabnotes
-      until: gabnotes.finished
-      changed_when: '"Restarting Ghost" in gabnotes.stdout'
-      retries: 100
-      delay: 10
     - name: Check voyages-lois.augendre.info
       ansible.builtin.async_status:
         jid: "{{ voyages_lois_async.ansible_job_id }}"
