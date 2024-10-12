@@ -3,9 +3,22 @@
   hosts: servers
   gather_facts: false
   tasks:
-    - name: Docker
-      ansible.builtin.include_role:
-        name: docker
+    - name: Create dir
+      ansible.builtin.file:
+        path: "{{ dir }}"
+        state: directory
+        mode: "0775"
+    - name: Write files
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "{{ dir }}/"
+        mode: "0600"
+      with_fileglob:
+        - files/{{ app_name }}/*
+        - files/{{ app_name }}/.*
+      notify:
+        - Restart service
 
   vars:
-    docker_app_name: ynab
+    app_name: ynab
+    dir: /mnt/data/{{ app_name }}
