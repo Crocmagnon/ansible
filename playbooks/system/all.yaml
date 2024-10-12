@@ -1,2 +1,3 @@
 ---
 - import_playbook: update.yaml # noqa: name[play]
+- import_playbook: cron.yaml # noqa: name[play]

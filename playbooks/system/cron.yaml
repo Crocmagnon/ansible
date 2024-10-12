@@ -1,0 +1,70 @@
+---
+- name: Setup crontab
+  hosts: servers
+  gather_facts: false
+  tasks:
+    - name: Cron - Docker system prune
+      ansible.builtin.cron:
+        name: docker system prune
+        minute: 0
+        hour: 4
+        weekday: SUN
+        job: /mnt/data/bin/healthcheck docker-system-prune /mnt/data/bin/docker-system-prune
+    - name: Cron - Clean old backups
+      ansible.builtin.cron:
+        name: clean old backups
+        minute: 55
+        hour: 4
+        job: /mnt/data/bin/healthcheck clean-old-backups /mnt/data/bin/clean-old-backups
+    - name: Cron - YNAB
+      ansible.builtin.cron:
+        name: YNAB
+        minute: 50
+        hour: 6
+        weekday: TUE-SAT
+        job: /mnt/data/bin/healthcheck ynab /mnt/data/ynab/run
+    - name: Cron - Nextcloud cron
+      ansible.builtin.cron:
+        name: Nextcloud cron
+        minute: "*/5"
+        job: /mnt/data/bin/healthcheck nextcloud-cron /mnt/data/bin/nextcloud-cron
+    - name: Cron - Nextcloud preview
+      ansible.builtin.cron:
+        name: Nextcloud preview
+        minute: "*/7"
+        job: /mnt/data/bin/healthcheck nextcloud-preview /mnt/data/bin/nextcloud-preview
+    - name: Cron - Nextcloud update apps
+      ansible.builtin.cron:
+        name: Nextcloud update apps
+        special_time: daily
+        job: /mnt/data/bin/healthcheck nextcloud-auto-update /mnt/data/bin/nextcloud-auto-update
+    - name: Cron - Dump manuels
+      ansible.builtin.cron:
+        name: Dump manuels
+        minute: 45
+        job: /mnt/data/bin/healthcheck dump-manuels /mnt/data/bin/dump-manuels
+    - name: Cron - Dump miniflux
+      ansible.builtin.cron:
+        name: Dump miniflux
+        minute: 50
+        job: /mnt/data/bin/healthcheck dump-miniflux /mnt/data/bin/dump-miniflux
+    - name: Cron - Dump nextcloud
+      ansible.builtin.cron:
+        name: Dump nextcloud
+        minute: 52
+        job: /mnt/data/bin/healthcheck dump-nextcloud /mnt/data/bin/dump-nextcloud
+    - name: Cron - Dump voyages.coccomagnard.fr
+      ansible.builtin.cron:
+        name: Dump voyages.coccomagnard.fr
+        minute: 55
+        job: /mnt/data/bin/healthcheck dump-voyages-coccomagnard-fr /mnt/data/bin/dump-voyages.coccomagnard.fr
+    - name: Cron - Dump gabnotes.org
+      ansible.builtin.cron:
+        name: Dump gabnotes.org
+        minute: 56
+        job: /mnt/data/bin/healthcheck dump-gabnotes-org /mnt/data/bin/dump-gabnotes.org
+    - name: Cron - Dump voyages-lois.augendre.info
+      ansible.builtin.cron:
+        name: Dump voyages-lois.augendre.info
+        minute: 57
+        job: /mnt/data/bin/healthcheck dump-voyages-lois-augendre-info /mnt/data/bin/dump-voyages-lois.augendre.info
