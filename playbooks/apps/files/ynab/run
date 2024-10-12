@@ -1,0 +1,10 @@
+#!/bin/bash
+set -uxo pipefail
+
+pushd /mnt/data/ynab
+docker compose --ansi never pull --quiet
+docker compose --ansi never down
+COMPOSE_HTTP_TIMEOUT=120 docker compose --ansi never up --abort-on-container-exit --exit-code-from ynab
+status=$?
+popd
+exit $status

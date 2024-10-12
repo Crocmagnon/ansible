@@ -1,0 +1,14 @@
+services:
+  ynab:
+    image: crocmagnon/ynab:latest
+    command:
+      - ynab
+      - lcl
+      - --download
+      - --send=home_assistant
+    restart: "no"
+    environment:
+      - PYTHONWARNINGS=ignore:The localize method is no longer necessary
+    volumes:
+      - ./config.ini:/root/.config/ofx_processor/config.ini:ro
+      - ./data:/data
