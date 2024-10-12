@@ -1,0 +1,68 @@
+services:
+  plex:
+    image: plexinc/pms-docker:plexpass
+    restart: always
+    env_file: plex.env
+    ports:
+      - "9003:32400"
+#      - "32400:32400/tcp"
+#      - "3005:3005/tcp"
+#      - "8324:8324/tcp"
+#      - "32469:32469/tcp"
+#      - "1900:1900/udp"
+#      - "32410:32410/udp"
+#      - "32412:32412/udp"
+#      - "32413:32413/udp"
+#      - "32414:32414/udp"
+    volumes:
+      - ./plex/config:/config
+      - ./plex/transcode:/transcode
+      - ./data:/data
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    restart: always
+    env_file: transmission.env
+    volumes:
+      - ./transmission:/config
+      - ./data:/data
+    mem_limit: 2g
+    ports:
+      - "9004:9091"
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    restart: always
+    env_file: common.env
+    volumes:
+      - ./sonarr:/config
+      - ./data:/data
+    mem_limit: 1g
+    ports:
+      - "9005:8989"
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    restart: always
+    env_file: common.env
+    volumes:
+      - ./prowlarr:/config
+    mem_limit: 1g
+    ports:
+      - "9006:9696"
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    restart: always
+    env_file: common.env
+    volumes:
+      - ./radarr:/config
+      - ./data:/data
+    mem_limit: 1g
+    ports:
+      - "9007:7878"
+  unpackerr:
+    image: golift/unpackerr
+    volumes:
+      - ./data:/data
+    restart: always
+    user: 1000:1000
+    env_file: unpackerr.env
+    mem_limit: 2g
+    cpus: 2

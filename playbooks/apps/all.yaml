@@ -12,5 +12,6 @@
 - import_playbook: goatcounter.yaml # noqa: name[play]
 - import_playbook: lyon-transports.yaml # noqa: name[play]
 - import_playbook: manuels.yaml # noqa: name[play]
+- import_playbook: media.yaml # noqa: name[play]
 - import_playbook: test_headers.yaml # noqa: name[play]
 - import_playbook: wallabag.yaml # noqa: name[play]
