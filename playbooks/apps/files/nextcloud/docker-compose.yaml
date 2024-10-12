@@ -1,0 +1,89 @@
+services:
+  nextcloud:
+    build:
+      context: nextcloud_build
+      pull: true
+    image: nextcloud_local
+    restart: always
+    ports:
+      - "8003:80"
+    volumes:
+      - ./nextcloud_data:/var/www/html
+    env_file: nextcloud.env
+    depends_on:
+      - db
+      - redis
+    mem_limit: 1g
+    cpus: 3
+  fulltextsearchindex:
+    build:
+      context: nextcloud_build
+      pull: true
+    image: nextcloud_local
+    restart: always
+    working_dir: /var/www/html
+    command: /var/www/html/occ fulltextsearch:live -q
+    user: '33:33'
+    volumes:
+      - ./nextcloud_data:/var/www/html
+    env_file: nextcloud.env
+    depends_on:
+      - db
+      - elasticsearch
+    mem_limit: 100m
+    cpus: 1
+  notify_push:
+    build:
+      context: nextcloud_build
+      pull: true
+    image: nextcloud_local
+    working_dir: /var/www/html/config
+    command: /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push config.php
+    restart: always
+    volumes:
+      - ./nextcloud_data:/var/www/html:ro
+    env_file: nextcloud.env
+    environment:
+      RUST_BACKTRACE: full
+      COLORBT_SHOW_HIDDEN: 1
+#      NEXTCLOUD_URL: http://nextcloud/
+    depends_on:
+      - nextcloud
+    ports:
+      - "8004:7867"
+    mem_limit: 150m
+  db:
+    image: postgres:15
+    restart: always
+    env_file: postgres.env
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    mem_limit: 1g
+  redis:
+    image: redis:7
+    restart: always
+    mem_limit: 150m
+  elasticsearch:
+    image: custom-elastic
+    build:
+      context: ./elasticsearch/
+      pull: true
+      args:
+        ELASTIC_VERSION: "8.9.2"
+    restart: always
+    env_file: elasticsearch.env
+    mem_limit: 8g
+    volumes:
+      - ./elastic_data:/usr/share/elasticsearch/data
+      - ./elastic_backups:/backups
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.9.1
+    restart: always
+    env_file: kibana.env
+    ports:
+      - "9009:5601"
+    volumes:
+      - ./kibana_data:/usr/share/kibana/data
+      - ./elastic_backups:/backups
+    depends_on:
+      - elasticsearch
