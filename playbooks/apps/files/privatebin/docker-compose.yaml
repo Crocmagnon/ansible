@@ -1,0 +1,12 @@
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine:stable
+    read_only: true
+    restart: always
+    volumes:
+      - ./data:/srv/data
+      - ./conf.php:/srv/cfg/conf.php:ro
+    cpus: 0.5
+    mem_limit: 150m
+    ports:
+      - "8010:8080"
