@@ -1,0 +1,27 @@
+---
+- name: Setup root crontab
+  hosts: servers
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Cron - Restic backup
+      ansible.builtin.cron:
+        name: restic backup
+        minute: 0
+        job: /mnt/data/bin/healthcheck restic-backup /mnt/data/bin/restic-backup
+    - name: Cron - Restic prune
+      ansible.builtin.cron:
+        name: restic prune
+        minute: 30
+        hour: "*/3"
+        job: /mnt/data/bin/healthcheck restic-prune /mnt/data/bin/restic-prune
+    - name: Cron - SMART short
+      ansible.builtin.cron:
+        name: SMART short
+        special_time: weekly
+        job: /mnt/data/bin/smartshort
+    - name: Cron - SMART long
+      ansible.builtin.cron:
+        name: SMART long
+        special_time: monthly
+        job: /mnt/data/bin/smartlong
