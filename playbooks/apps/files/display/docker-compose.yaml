@@ -1,0 +1,7 @@
+services:
+  app:
+    build:
+      context: sources
+    restart: always
+    ports:
+      - "9010:80"
