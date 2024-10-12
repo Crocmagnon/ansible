@@ -28,16 +28,19 @@
         name: Nextcloud cron
         minute: "*/5"
         job: /mnt/data/bin/healthcheck nextcloud-cron /mnt/data/bin/nextcloud-cron
+        disabled: true
     - name: Cron - Nextcloud preview
       ansible.builtin.cron:
         name: Nextcloud preview
         minute: "*/7"
         job: /mnt/data/bin/healthcheck nextcloud-preview /mnt/data/bin/nextcloud-preview
+        disabled: true
     - name: Cron - Nextcloud update apps
       ansible.builtin.cron:
         name: Nextcloud update apps
         special_time: daily
         job: /mnt/data/bin/healthcheck nextcloud-auto-update /mnt/data/bin/nextcloud-auto-update
+        disabled: true
     - name: Cron - Dump manuels
       ansible.builtin.cron:
         name: Dump manuels
@@ -53,6 +56,7 @@
         name: Dump nextcloud
         minute: 52
         job: /mnt/data/bin/healthcheck dump-nextcloud /mnt/data/bin/dump-nextcloud
+        disabled: true
     - name: Cron - Dump voyages.coccomagnard.fr
       ansible.builtin.cron:
         name: Dump voyages.coccomagnard.fr
