@@ -1,0 +1,10 @@
+services:
+  django:
+    image: rg.fr-par.scw.cloud/crocmagnon/shortener
+    env_file: shortener.env
+    restart: always
+    volumes:
+      - ./shortener_data:/db
+    mem_limit: 300m
+    ports:
+      - "8011:8000"
