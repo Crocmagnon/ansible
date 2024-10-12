@@ -129,6 +129,19 @@ tcl.augendre.info {
 	reverse_proxy localhost:8013
 }
 
+cloud-aio.augendre.info {
+	import common_headers
+	reverse_proxy localhost:8014
+}
+aio.augendre.info {
+	import common_headers
+	reverse_proxy https://localhost:8015 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
+
 ## Ghost blogs (ports >=2368)
 #########################################################
 
