@@ -1,0 +1,19 @@
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    restart: always
+    env_file: miniflux.env
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
+    mem_limit: 512m
+    ports:
+      - "8008:3298"
+  db:
+    image: postgres:15
+    restart: always
+    env_file: postgres.env
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    mem_limit: 512m
