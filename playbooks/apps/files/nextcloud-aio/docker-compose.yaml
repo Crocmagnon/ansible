@@ -5,7 +5,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
     environment:
-      APACHE_PORT: 8014
+      APACHE_PORT: 8003
       APACHE_IP_BINDING: 127.0.0.1
       NEXTCLOUD_DATADIR: /mnt/data/nextcloud-aio/nextcloud_data
       NEXTCLOUD_ENABLE_DRI_DEVICE: true # This allows to enable the /dev/dri device in the Nextcloud container. ⚠️⚠️⚠️ Warning: this only works if the '/dev/dri' device is present on the host! If it should not exist on your host, don't set this to true as otherwise the Nextcloud container will fail to start! See https://github.com/nextcloud/all-in-one#how-to-enable-hardware-transcoding-for-nextcloud

@@ -68,14 +68,6 @@ checkout.augendre.info {
 
 cloud.augendre.info {
 	import common_headers
-	route /push/* {
-		uri strip_prefix /push
-		reverse_proxy localhost:8004
-	}
-	# rewrite to suppress carddav/caldav warning
-	# in nextcloud settings
-	rewrite /.well-known/carddav /remote.php/dav/
-	rewrite /.well-known/caldav /remote.php/dav/
 	reverse_proxy localhost:8003
 }
 
@@ -127,11 +119,6 @@ manuels.augendre.info, fournitures.augendre.info {
 tcl.augendre.info {
 	import common_headers
 	reverse_proxy localhost:8013
-}
-
-cloud-aio.augendre.info {
-	import common_headers
-	reverse_proxy localhost:8014
 }
 
 ## Ghost blogs (ports >=2368)

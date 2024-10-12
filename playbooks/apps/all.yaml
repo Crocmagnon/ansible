@@ -14,7 +14,7 @@
 - import_playbook: manuels.yaml # noqa: name[play]
 - import_playbook: media.yaml # noqa: name[play]
 - import_playbook: miniflux.yaml # noqa: name[play]
-- import_playbook: nextcloud.yaml # noqa: name[play]
+- import_playbook: nextcloud-aio.yaml # noqa: name[play]
 - import_playbook: portainer.yaml # noqa: name[play]
 - import_playbook: privatebin.yaml # noqa: name[play]
 - import_playbook: shortener.yaml # noqa: name[play]
