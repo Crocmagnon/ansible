@@ -6,6 +6,7 @@
 - import_playbook: code.yaml # noqa: name[play]
 - import_playbook: collabora.yaml # noqa: name[play]
 - import_playbook: display.yaml # noqa: name[play]
+- import_playbook: ghost-config.yaml # noqa: name[play]
 - import_playbook: ghost-update.yaml # noqa: name[play]
 - import_playbook: gitea.yaml # noqa: name[play]
 - import_playbook: goatcounter.yaml # noqa: name[play]

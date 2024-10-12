@@ -1,0 +1,40 @@
+{
+  "url": "https://voyages.coccomagnard.fr/",
+  "server": {
+    "port": 2370,
+    "host": "0.0.0.0"
+  },
+  "database": {
+    "client": "mysql",
+    "connection": {
+      "host": "127.0.0.1",
+      "user": "ghost-310",
+      "password": "{{ item.db_password }}",
+      "database": "voyages_coccomagnard_fr_prod"
+    }
+  },
+  "mail": {
+    "transport": "SMTP",
+    "from": "voyages@mg.coccomagnard.fr",
+    "options": {
+      "service": "Mailgun",
+      "host": "smtp.eu.mailgun.org",
+      "port": 465,
+      "secure": true,
+      "auth": {
+        "user": "voyages@mg.coccomagnard.fr",
+        "pass": "{{ item.mail_password }}"
+      }
+    }
+  },
+  "logging": {
+    "transports": [
+      "file",
+      "stdout"
+    ]
+  },
+  "process": "systemd",
+  "paths": {
+    "contentPath": "/mnt/data/voyages.coccomagnard.fr/content"
+  }
+}

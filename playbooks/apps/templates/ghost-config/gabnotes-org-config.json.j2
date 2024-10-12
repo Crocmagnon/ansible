@@ -1,0 +1,46 @@
+{
+  "url": "https://gabnotes.org",
+  "admin": {
+    "url": "https://ghost.augendre.info"
+  },
+  "server": {
+    "port": 2368,
+    "host": "0.0.0.0"
+  },
+  "database": {
+    "client": "mysql",
+    "connection": {
+      "host": "127.0.0.1",
+      "user": "ghost-900",
+      "password": "{{ item.db_password }}",
+      "database": "gabnotes_org_prod"
+    }
+  },
+  "mail": {
+    "transport": "SMTP",
+    "from": "blog@mg.gabnotes.org",
+    "options": {
+      "service": "Mailgun",
+      "host": "smtp.eu.mailgun.org",
+      "port": 465,
+      "secure": true,
+      "auth": {
+        "user": "blog@mg.gabnotes.org",
+        "pass": "{{ item.mail_password }}"
+      }
+    }
+  },
+  "logging": {
+    "transports": [
+      "file",
+      "stdout"
+    ]
+  },
+  "process": "systemd",
+  "paths": {
+    "contentPath": "/mnt/data/gabnotes.org/content"
+  },
+  "privacy": {
+    "useGravatar": false
+  }
+}
