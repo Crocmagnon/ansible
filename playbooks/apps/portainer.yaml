@@ -1,0 +1,11 @@
+---
+- name: Portainer
+  hosts: servers
+  gather_facts: false
+  tasks:
+    - name: Docker
+      ansible.builtin.include_role:
+        name: docker
+
+  vars:
+    docker_app_name: portainer
