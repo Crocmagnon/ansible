@@ -1,0 +1,43 @@
+---
+- name: Borgmatic
+  hosts: servers
+  pre_tasks:
+    - name: Install system deps
+      become: true
+      ansible.builtin.apt:
+        pkg:
+          - liblz4-dev
+          - libzstd-dev
+          - libxxhash-dev
+  roles:
+    - role: borgbase.ansible_role_borgbackup
+      become: true
+      borg_encryption_passphrase: "{{ borg_encryption_key }}"
+      borg_repository:
+        - ssh://ch78x32l@ch78x32l.repo.borgbase.com/./repo
+      borg_source_directories:
+        - /mnt/data/nextcloud-aio/backups/borg
+      borgmatic_timer_hour: 5
+      borgmatic_timer_minute: 30
+      borgmatic_hooks:
+        before_backup:
+          - /mnt/data/bin/borgmatic_on_before_backup.sh
+        after_backup:
+          - /mnt/data/bin/borgmatic_on_after_backup.sh
+        on_error:
+          - /mnt/data/bin/borgmatic_on_error_backup.sh {repository} {error} {output}
+      borg_retention_policy:
+        keep_daily: 7
+        keep_weekly: 4
+        keep_monthly: 6
+
+  vars:
+    borg_encryption_key: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      65386462653063386665316566303864353630386161393931343962613438626163326439626364
+      3262303034306539396163396461386366303262653265630a663335323737646465643538613666
+      34396131373834616265353336346261333362333735643963323762356234623234656166356239
+      6362333266326666300a393435376135623136346537393532336337363264386361643330323038
+      65373362393063333464316235343538316661636138356462336164613262616265646263396136
+      39376534656239643539613663626261616637393737636337653936663837656636613963346164
+      353537353131636139303061613137353065

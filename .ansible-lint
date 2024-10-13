@@ -6,3 +6,4 @@ exclude_paths:
   - "**/*docker-compose.yml"
   - .github/
   - .pre-commit-config.yaml
+  - roles/borgbase.ansible_role_borgbackup/**
