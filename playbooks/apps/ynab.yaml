@@ -12,7 +12,7 @@
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ dir }}/"
-        mode: "0600"
+        mode: preserve
       with_fileglob:
         - files/{{ app_name }}/*
         - files/{{ app_name }}/.*
