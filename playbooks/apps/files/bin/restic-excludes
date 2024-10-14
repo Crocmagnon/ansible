@@ -12,8 +12,8 @@ prowlarr
 radarr
 sonarr
 transmission
-nextcloud_data/lib
-nextcloud_data/data/appdata_ocw94g5hjk8b/preview
+/mnt/data/nextcloud
+nextcloud-aio
 source_code
 sources
 .cache
@@ -22,4 +22,6 @@ prometheus_data
 .es_temp_file
 timemachine
 elastic_data
-nextcloud-aio
+code/code_data
+node_modules
+whisper-data
