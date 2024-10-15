@@ -7,4 +7,4 @@ services:
       - ./wallabag_data/data:/var/www/wallabag/data
       - ./wallabag_data/images:/var/www/wallabag/web/assets/images
     ports:
-      - "8009:80"
+      - "127.0.0.1:8009:80"

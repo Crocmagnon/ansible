@@ -8,4 +8,4 @@ services:
     mem_limit: 3g
     cpus: 3
     ports:
-      - "9002:8443"
+      - "127.0.0.1:9002:8443"

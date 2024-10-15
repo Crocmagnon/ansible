@@ -9,7 +9,7 @@ services:
       test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
     mem_limit: 512m
     ports:
-      - "8008:3298"
+      - "127.0.0.1:8008:3298"
   db:
     image: postgres:15
     restart: always

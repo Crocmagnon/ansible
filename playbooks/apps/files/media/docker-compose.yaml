@@ -4,7 +4,7 @@ services:
     restart: always
     env_file: plex.env
     ports:
-      - "9003:32400"
+      - "127.0.0.1:9003:32400"
 #      - "32400:32400/tcp"
 #      - "3005:3005/tcp"
 #      - "8324:8324/tcp"
@@ -27,7 +27,7 @@ services:
       - ./data:/data
     mem_limit: 2g
     ports:
-      - "9004:9091"
+      - "127.0.0.1:9004:9091"
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     restart: always
@@ -37,7 +37,7 @@ services:
       - ./data:/data
     mem_limit: 1g
     ports:
-      - "9005:8989"
+      - "127.0.0.1:9005:8989"
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     restart: always
@@ -46,7 +46,7 @@ services:
       - ./prowlarr:/config
     mem_limit: 1g
     ports:
-      - "9006:9696"
+      - "127.0.0.1:9006:9696"
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     restart: always
@@ -56,7 +56,7 @@ services:
       - ./data:/data
     mem_limit: 1g
     ports:
-      - "9007:7878"
+      - "127.0.0.1:9007:7878"
   unpackerr:
     image: golift/unpackerr
     volumes:

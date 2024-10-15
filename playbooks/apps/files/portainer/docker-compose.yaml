@@ -6,4 +6,4 @@ services:
       - ./portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "9001:9443"
+      - "127.0.0.1:9001:9443"

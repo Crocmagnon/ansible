@@ -9,4 +9,4 @@ services:
     cpus: 0.5
     mem_limit: 150m
     ports:
-      - "8010:8080"
+      - "127.0.0.1:8010:8080"

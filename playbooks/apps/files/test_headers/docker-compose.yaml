@@ -5,6 +5,6 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "9008:8080"
+      - "127.0.0.1:9008:8080"
     init: true
     tty: true
