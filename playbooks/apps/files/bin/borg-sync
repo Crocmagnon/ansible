@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Change all the variables below to suit your needs:
+SOURCE_DIRECTORY="/mnt/data/nextcloud-aio/backups/borg"
+RCLONE_CONFIG="borgbase-nextcloud-aio"
+
+TARGET_DIRECTORY="repo" # this is the BorgBase directory name: modify it only if you want to specify a different one (discouraged)
+
+########################################
+# DO NOT modify any of the following! #
+########################################
+
+if [ "$EUID" -ne 0 ]; then
+    echo "run as root"
+    output 1
+fi
+
+if ! [ -d "$SOURCE_DIRECTORY" ]; then
+    echo "The root directory does not exist."
+    exit 1
+fi
+
+if [ -z "$(ls -A "$SOURCE_DIRECTORY/")" ]; then
+    echo "The source directory is empty, which is not allowed."
+    exit 1
+fi
+
+if [ -f "$SOURCE_DIRECTORY/lock.roster" ]; then
+    echo "Unable to execute the script as the backup archive is currently modified. Please try again later."
+    exit 1
+fi
+
+if [ -f "$SOURCE_DIRECTORY/aio-lockfile" ]; then
+    echo "Cannot continue because aio-lockfile already exists."
+    exit 1
+fi
+
+touch "$SOURCE_DIRECTORY/aio-lockfile"
+
+
+if ! rclone sync -v --exclude aio-lockfile "$SOURCE_DIRECTORY/" "$RCLONE_CONFIG:$TARGET_DIRECTORY"; then
+    if docker ps --format "{{.Names}}" | grep "^nextcloud-aio-nextcloud$"; then
+        docker exec -en nextcloud-aio-nextcloud bash /notify.sh "Rclone failed." "Failed to synchronise the backup repository with the target directory."
+    else
+        echo "Failed to synchronise the backup repository with the target directory."
+    fi
+    rm "$SOURCE_DIRECTORY/aio-lockfile"
+    exit 1
+fi
+
+rm "$SOURCE_DIRECTORY/aio-lockfile"
+
+if docker ps --format "{{.Names}}" | grep "^nextcloud-aio-nextcloud$"; then
+    docker exec -en nextcloud-aio-nextcloud bash /notify.sh "Rclone backup successful!" "Synchronised the backup repository successfully."
+else
+    echo "Synchronised the backup repository successfully."
+fi

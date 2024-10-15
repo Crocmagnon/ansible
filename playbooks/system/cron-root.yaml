@@ -15,6 +15,12 @@
         minute: 30
         hour: "*/3"
         job: /mnt/data/bin/healthcheck restic-prune /mnt/data/bin/restic-prune
+    - name: Cron - Borgbase sync
+      ansible.builtin.cron:
+        name: borgbase sync
+        minute: 30
+        hour: 3
+        job: /mnt/data/bin/healthcheck borg-sync /mnt/data/bin/borg-sync
     - name: Cron - SMART short
       ansible.builtin.cron:
         name: SMART short
