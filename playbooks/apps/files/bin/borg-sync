@@ -4,11 +4,7 @@
 SOURCE_DIRECTORY="/mnt/data/nextcloud-aio/backups/borg"
 RCLONE_CONFIG="borgbase-nextcloud-aio"
 
-TARGET_DIRECTORY="repo" # this is the BorgBase directory name: modify it only if you want to specify a different one (discouraged)
-
-########################################
-# DO NOT modify any of the following! #
-########################################
+TARGET_DIRECTORY="repo"
 
 if [ "$EUID" -ne 0 ]; then
     echo "run as root"
@@ -39,19 +35,11 @@ touch "$SOURCE_DIRECTORY/aio-lockfile"
 
 
 if ! rclone sync -v --exclude aio-lockfile "$SOURCE_DIRECTORY/" "$RCLONE_CONFIG:$TARGET_DIRECTORY"; then
-    if docker ps --format "{{.Names}}" | grep "^nextcloud-aio-nextcloud$"; then
-        docker exec -en nextcloud-aio-nextcloud bash /notify.sh "Rclone failed." "Failed to synchronise the backup repository with the target directory."
-    else
-        echo "Failed to synchronise the backup repository with the target directory."
-    fi
+    echo "Failed to synchronise the backup repository with the target directory."
     rm "$SOURCE_DIRECTORY/aio-lockfile"
     exit 1
 fi
 
 rm "$SOURCE_DIRECTORY/aio-lockfile"
 
-if docker ps --format "{{.Names}}" | grep "^nextcloud-aio-nextcloud$"; then
-    docker exec -en nextcloud-aio-nextcloud bash /notify.sh "Rclone backup successful!" "Synchronised the backup repository successfully."
-else
-    echo "Synchronised the backup repository successfully."
-fi
+echo "Done"
