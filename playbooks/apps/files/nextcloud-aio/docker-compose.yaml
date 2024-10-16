@@ -30,7 +30,14 @@ services:
     restart: always
     container_name: nextcloud-aio-mastercontainer
     init: true
+    networks:
+      - default
+      - nextcloud-aio
 
 volumes:
   nextcloud_aio_mastercontainer:
     name: nextcloud_aio_mastercontainer
+
+networks:
+  nextcloud-aio:
+    external: true
