@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Change all the variables below to suit your needs:
-SOURCE_DIRECTORY="/mnt/data/nextcloud-aio/backups/borg"
+SOURCE_DIRECTORY="/mnt/backup/nextcloud/borg"
 RCLONE_CONFIG="borgbase-nextcloud-aio"
 
 TARGET_DIRECTORY="repo"
