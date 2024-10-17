@@ -6,13 +6,12 @@
     - name: Write service file
       become: true
       ansible.builtin.template:
-        src: templates/lyon-transports.service.j2
+        src: templates/lyon-transports/lyon-transports.service.j2
         dest: /etc/systemd/system/lyon-transports.service
         mode: "0600"
         owner: root
         group: root
       notify:
-        - Reload daemon
         - Restart service
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
@@ -24,15 +23,12 @@
         enabled: true
 
   handlers:
-    - name: Reload daemon
-      become: true
-      ansible.builtin.systemd:
-        daemon_reload: true
     - name: Restart service
       become: true
-      ansible.builtin.service:
+      ansible.builtin.systemd:
         name: lyon-transports
         state: restarted
+        daemon_reload: true
 
   vars:
     dir: /mnt/data/lyon-transports
