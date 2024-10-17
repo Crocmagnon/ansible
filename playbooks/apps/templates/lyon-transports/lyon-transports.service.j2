@@ -3,7 +3,7 @@ Description=Lyon transports API
 After=network.target
 
 [Service]
-ExecStart={{ dir }}/lyon-transports-linux-amd64 --host 0.0.0.0 --port 8013 -u {{ lyon_transports_username }} -p {{ lyon_transports_password }} --cors-allowed-origin https://display.augendre.info
+ExecStart={{ dir }}/lyon-transports-linux-amd64 --host 127.0.0.1 --port 8013 -u {{ lyon_transports_username }} -p {{ lyon_transports_password }} --cors-allowed-origin https://display.augendre.info
 Type=simple
 Restart=always
 User=gaugendre

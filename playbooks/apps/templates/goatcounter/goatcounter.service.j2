@@ -3,7 +3,7 @@ Description=Goatcounter
 After=network.target
 
 [Service]
-ExecStart={{ dir }}/goatcounter serve -listen *:8005 -tls http -smtp smtps://goatcounter%%40mg.augendre.info:{{gc_mailgun_api_key}}@smtp.mailgun.org:587 -email-from goatcounter@mg.augendre.info -automigrate -db sqlite+{{ dir }}/db/goatcounter.sqlite3
+ExecStart={{ dir }}/goatcounter serve -listen 127.0.0.1:8005 -tls http -smtp smtps://goatcounter%%40mg.augendre.info:{{gc_mailgun_api_key}}@smtp.mailgun.org:587 -email-from goatcounter@mg.augendre.info -automigrate -db sqlite+{{ dir }}/db/goatcounter.sqlite3
 Type=simple
 Restart=always
 User=gaugendre
