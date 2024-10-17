@@ -1,12 +1,13 @@
 ---
 - name: Stop service
+  listen: Restart service
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
     state: stopped
-  listen: Restart service
 - name: Start service
+  listen: Restart service
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
     state: present
     build: "{{ docker_build }}"
-  listen: Restart service
+    remove_orphans: "{{ docker_remove_orphans }}"

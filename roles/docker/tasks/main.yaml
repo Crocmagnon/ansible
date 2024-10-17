@@ -30,3 +30,4 @@
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
     state: present
+    remove_orphans: "{{ docker_remove_orphans }}"
