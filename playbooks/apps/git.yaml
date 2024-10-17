@@ -1,5 +1,5 @@
 ---
-- name: Gitea
+- name: Forgejo
   hosts: servers
   gather_facts: false
   tasks:

@@ -1,6 +1,6 @@
 services:
   server:
-    image: codeberg.org/forgejo/forgejo:8
+    image: codeberg.org/forgejo/forgejo:9
     env_file: gitea.env
     restart: always
     volumes:

@@ -1,6 +1,6 @@
 services:
   app:
-    image: python:3.13-slim
+    image: python:3-slim
     command: python /app/app.py
     volumes:
       - ./:/app
