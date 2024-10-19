@@ -278,7 +278,7 @@ cloud-old.augendre.info {
 #########################################################
 mariage.augendre.info {
 	import common_headers
-	redir https://cloud.augendre.info/s/65JgH8fzz2CyJZ3
+	redir https://cloud.augendre.info/s/bLcf3C8LzcSo8AR
 }
 
 mail.augendre.info {
