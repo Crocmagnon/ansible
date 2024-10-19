@@ -288,7 +288,7 @@ mail.augendre.info {
 
 cv-gabriel.augendre.info {
 	import common_headers
-	redir https://cloud.augendre.info/s/FHGJkc2DzJECY64/download permanent
+	redir https://cloud.augendre.info/s/LpcSwsygEFRsXFD/download permanent
 }
 
 blog.augendre.info gabriel.augendre.info www.gabnotes.org {
