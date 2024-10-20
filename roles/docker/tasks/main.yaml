@@ -1,10 +1,10 @@
 ---
-- name: Create dir
+- name: Create dir for {{ docker_app_name }}
   ansible.builtin.file:
     path: "{{ docker_dir }}"
     state: directory
     mode: "0775"
-- name: Write files
+- name: Write files for {{ docker_app_name }}
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ docker_dir }}/"
@@ -14,7 +14,7 @@
     - files/{{ docker_app_name }}/.*
   notify:
     - Restart service
-- name: Write templates
+- name: Write templates for {{ docker_app_name }}
   ansible.builtin.template:
     src: "{{ item }}"
     dest: "{{ docker_dir }}/{{ item | basename | regex_replace('\\.j2$', '') }}"
@@ -24,9 +24,9 @@
     - templates/{{ docker_app_name }}/.*.j2
   notify:
     - Restart service
-- name: Flush handlers
+- name: Flush handlers for {{ docker_app_name }}
   ansible.builtin.meta: flush_handlers
-- name: Ensure service is started
+- name: Ensure service is started {{ docker_app_name }}
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
     state: present

@@ -1,10 +1,10 @@
 ---
-- name: Stop service
+- name: Stop service {{ docker_app_name }}
   listen: Restart service
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
     state: stopped
-- name: Start service
+- name: Start service {{ docker_app_name }}
   listen: Restart service
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
