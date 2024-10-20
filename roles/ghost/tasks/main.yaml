@@ -16,4 +16,5 @@
   ansible.builtin.command:
     cmd: ghost update
     chdir: /mnt/data/{{ ghost_site }}
-  changed_when: '"Restarting Ghost" in gabnotes.stdout'
+  register: update
+  changed_when: '"Restarting Ghost" in update.stdout'
