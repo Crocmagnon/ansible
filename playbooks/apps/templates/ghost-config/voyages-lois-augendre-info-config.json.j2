@@ -9,7 +9,7 @@
     "connection": {
       "host": "127.0.0.1",
       "user": "ghost-483",
-      "password": "{{ item.db_password }}",
+      "password": "{{ ghost_setup_db_password }}",
       "database": "voyages_lois_augendre_info_prod"
     }
   },
@@ -23,7 +23,7 @@
       "secure": true,
       "auth": {
         "user": "voyages-lois@mg.augendre.info",
-        "pass": "{{ item.mail_password }}"
+        "pass": "{{ ghost_setup_mail_password }}"
       }
     }
   },

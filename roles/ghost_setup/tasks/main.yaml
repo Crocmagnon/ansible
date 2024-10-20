@@ -1,0 +1,14 @@
+---
+- name: Write config files
+  ansible.builtin.template:
+    src: templates/ghost-config/{{ ghost_setup_filename }}
+    dest: /mnt/data/{{ ghost_setup_site }}/config.production.json
+    mode: "0664"
+  notify:
+    - Restart service
+- name: Ensure service is started
+  ansible.builtin.command:
+    cmd: ghost start
+    chdir: /mnt/data/{{ ghost_setup_site }}
+  register: start
+  changed_when: '"Starting Ghost" in start.stdout'
