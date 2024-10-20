@@ -1,0 +1,6 @@
+---
+- name: Restart service {{ ghost_site }}
+  ansible.builtin.command:
+    cmd: ghost restart
+    chdir: /mnt/data/{{ ghost_site }}
+  changed_when: true

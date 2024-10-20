@@ -1,0 +1,19 @@
+---
+- name: Write config files for {{ ghost_site }}
+  ansible.builtin.template:
+    src: templates/ghost/{{ ghost_filename }}
+    dest: /mnt/data/{{ ghost_site }}/config.production.json
+    mode: "0664"
+  notify:
+    - Restart service
+- name: Ensure service is started {{ ghost_site }}
+  ansible.builtin.command:
+    cmd: ghost start
+    chdir: /mnt/data/{{ ghost_site }}
+  register: start
+  changed_when: '"Starting Ghost" in start.stdout'
+- name: Update {{ ghost_site }}
+  ansible.builtin.command:
+    cmd: ghost update
+    chdir: /mnt/data/{{ ghost_site }}
+  changed_when: '"Restarting Ghost" in gabnotes.stdout'

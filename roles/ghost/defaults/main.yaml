@@ -1,0 +1,5 @@
+---
+ghost_filename: site-com-config.json.j2
+ghost_site: site.com
+ghost_db_password: 123
+ghost_mail_password: 123
