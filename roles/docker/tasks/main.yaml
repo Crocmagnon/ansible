@@ -12,6 +12,8 @@
   with_fileglob:
     - files/{{ docker_app_name }}/*
     - files/{{ docker_app_name }}/.*
+  loop_control:
+    label: "{{ item | basename }}"
   notify:
     - Restart service
 - name: Write templates for {{ docker_app_name }}
@@ -22,9 +24,11 @@
   with_fileglob:
     - templates/{{ docker_app_name }}/*.j2
     - templates/{{ docker_app_name }}/.*.j2
+  loop_control:
+    label: "{{ item | basename }}"
   notify:
     - Restart service
-- name: Flush handlers for {{ docker_app_name }}
+- name: Flush handlers
   ansible.builtin.meta: flush_handlers
 - name: Ensure service is started {{ docker_app_name }}
   community.docker.docker_compose_v2:

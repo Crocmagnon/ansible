@@ -10,6 +10,8 @@
         mode: preserve
       with_fileglob:
         - files/bin/*
+      loop_control:
+        label: "{{ item | basename }}"
     - name: Template bin files
       ansible.builtin.template:
         src: "{{ item }}"
@@ -17,6 +19,8 @@
         mode: preserve
       with_fileglob:
         - templates/bin/*.j2
+      loop_control:
+        label: "{{ item | basename }}"
   vars:
     ghost_db_password: !vault |
       $ANSIBLE_VAULT;1.1;AES256
