@@ -46,6 +46,11 @@
         name: Dump manuels
         minute: 45
         job: /mnt/data/bin/healthcheck dump-manuels /mnt/data/bin/dump-manuels
+    - name: Cron - Dump paperless
+      ansible.builtin.cron:
+        name: Dump paperless
+        minute: 47
+        job: /mnt/data/bin/healthcheck dump-paperless /mnt/data/bin/dump-paperless
     - name: Cron - Dump miniflux
       ansible.builtin.cron:
         name: Dump miniflux
