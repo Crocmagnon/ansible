@@ -4,6 +4,7 @@
   community.docker.docker_compose_v2:
     project_src: "{{ docker_dir }}"
     state: stopped
+  when: docker_start_service
 - name: Start service {{ docker_app_name }}
   listen: Restart service
   community.docker.docker_compose_v2:
@@ -11,3 +12,4 @@
     state: present
     build: "{{ docker_build }}"
     remove_orphans: "{{ docker_remove_orphans }}"
+  when: docker_start_service

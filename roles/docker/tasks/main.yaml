@@ -4,6 +4,7 @@
     path: "{{ docker_dir }}"
     state: directory
     mode: "0775"
+  when: docker_create_dir
 - name: Write files for {{ docker_app_name }}
   ansible.builtin.copy:
     src: "{{ item }}"
@@ -16,6 +17,7 @@
     label: "{{ item | basename }}"
   notify:
     - Restart service
+  when: docker_write_files
 - name: Write templates for {{ docker_app_name }}
   ansible.builtin.template:
     src: "{{ item }}"
@@ -28,6 +30,7 @@
     label: "{{ item | basename }}"
   notify:
     - Restart service
+  when: docker_write_files
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 - name: Ensure service is started {{ docker_app_name }}
@@ -35,3 +38,4 @@
     project_src: "{{ docker_dir }}"
     state: present
     remove_orphans: "{{ docker_remove_orphans }}"
+  when: docker_start_service
