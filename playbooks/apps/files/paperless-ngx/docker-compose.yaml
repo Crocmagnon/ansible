@@ -63,6 +63,8 @@ services:
       - ./export:/usr/src/paperless/export
       - ./consume:/usr/src/paperless/consume
     env_file: docker-compose.env
+    init: true
+    tty: true
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
@@ -73,6 +75,8 @@ services:
   gotenberg:
     image: docker.io/gotenberg/gotenberg:8.7
     restart: unless-stopped
+    init: true
+    tty: true
 
     # The gotenberg chromium route is used to convert .eml files. We do not
     # want to allow external content like tracking pixels or even javascript.
@@ -89,6 +93,8 @@ services:
     restart: unless-stopped
     env_file: ftp.env
     image: garethflowers/ftp-server
+    init: true
+    tty: true
     ports:
       - '7020-7021:20-21/tcp'
 #      - '40000-40009:40000-40009/tcp' # Only needed for passive mode
