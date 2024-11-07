@@ -1,5 +1,5 @@
 ---
-- name: Nextcloud2
+- name: Nextcloud all-in-one
   hosts: servers
   gather_facts: false
   tasks:
