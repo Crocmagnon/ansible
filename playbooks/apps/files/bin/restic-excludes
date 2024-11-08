@@ -25,3 +25,5 @@ elastic_data
 code/code_data
 node_modules
 whisper-data
+# ghost versions
+versions
