@@ -27,3 +27,4 @@ node_modules
 whisper-data
 # ghost versions
 versions
+backups/hass
