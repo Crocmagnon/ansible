@@ -22,7 +22,7 @@
         minute: 50
         hour: 6
         weekday: TUE-SAT
-        job: /mnt/data/bin/healthcheck ynab /mnt/data/ynab/run
+        job: /mnt/data/bin/healthcheck ynab /mnt/data/ynab/run-go
     - name: Cron - Nextcloud cron
       ansible.builtin.cron:
         name: Nextcloud cron
