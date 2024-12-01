@@ -1,4 +1,5 @@
 #!/bin/bash
 set -euo pipefail
+pushd /mnt/data/ynab
 ./download -i {{lcl_identifier}} -p {{lcl_password}} -o out.csv -headless
 ./push -t {{ynab_token}} -b {{ynab_budget_id}} -a {{ynab_account_id}} -w {{webhook_url}} -f out.csv
