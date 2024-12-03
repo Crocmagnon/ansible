@@ -29,14 +29,14 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/ansible/ansible-lint
-    rev: v24.9.2
+    rev: v24.10.0
     hooks:
       - id: ansible-lint
         entry: python3 -m ansiblelint -v --force-color --fix
         additional_dependencies:
           - ansible # necessary because we're using community collections
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.33.0
+    rev: v1.34.0
     hooks:
       - id: ggshield
   - repo: local
