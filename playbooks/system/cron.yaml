@@ -77,3 +77,10 @@
         name: Dump voyages-lois.augendre.info
         minute: 57
         job: /mnt/data/bin/healthcheck dump-voyages-lois-augendre-info /mnt/data/bin/dump-voyages-lois.augendre.info
+    - name: Cron - Download Freebox invoice
+      ansible.builtin.cron:
+        name: Download Freebox invoice
+        minute: 0
+        hour: 13
+        day: 5
+        job: /mnt/data/bin/healthcheck download-freebox /mnt/data/paperless-ngx/download-freebox
