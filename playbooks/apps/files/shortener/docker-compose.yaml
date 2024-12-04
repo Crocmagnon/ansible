@@ -6,5 +6,7 @@ services:
     volumes:
       - ./shortener_data:/db
     mem_limit: 300m
+    tty: true
+    init: true
     ports:
       - "127.0.0.1:8011:8000"
