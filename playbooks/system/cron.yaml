@@ -91,3 +91,11 @@
         hour: 13
         day: 30
         job: /mnt/data/bin/healthcheck downloader /mnt/data/paperless-ngx/download-free-mobile
+    - name: Cron - Download Eau du Grand Lyon invoice
+      ansible.builtin.cron:
+        name: Download Eau du Grand Lyon invoice
+        minute: 0
+        hour: 13
+        day: 10
+        month: "6,12"
+        job: /mnt/data/bin/healthcheck downloader /mnt/data/paperless-ngx/download-eau-du-grand-lyon

@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+pushd /mnt/data/paperless-ngx
+./downloader eau-du-grand-lyon -o consume -u '{{downloader_eau_lyon_username}}' -p '{{downloader_eau_lyon_password}}' --headless
