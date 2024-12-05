@@ -83,4 +83,11 @@
         minute: 0
         hour: 13
         day: 5
-        job: /mnt/data/bin/healthcheck download-freebox /mnt/data/paperless-ngx/download-freebox
+        job: /mnt/data/bin/healthcheck downloader /mnt/data/paperless-ngx/download-freebox
+    - name: Cron - Download Free Mobile invoice
+      ansible.builtin.cron:
+        name: Download Free Mobile invoice
+        minute: 0
+        hour: 13
+        day: 30
+        job: /mnt/data/bin/healthcheck downloader /mnt/data/paperless-ngx/download-free-mobile
