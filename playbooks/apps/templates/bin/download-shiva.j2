@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+pushd /mnt/data/paperless-ngx
+./downloader shiva -o consume -u '{{downloader_shiva_username}}' -p '{{downloader_shiva_password}}' --headless
