@@ -106,3 +106,10 @@
         hour: 13
         day: 10
         job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-shiva
+    - name: Cron - Download LCL bank statement
+      ansible.builtin.cron:
+        name: Download LCL bank statement
+        minute: 0
+        hour: 13
+        day: 10
+        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-lcl-checking
