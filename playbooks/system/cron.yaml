@@ -113,3 +113,10 @@
         hour: 13
         day: 10
         job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-lcl-checking
+    - name: Cron - Download Octopus Energy proof of address
+      ansible.builtin.cron:
+        name: Download Octopus Energy proof of address
+        minute: 0
+        hour: 13
+        day: 15
+        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-octopus
