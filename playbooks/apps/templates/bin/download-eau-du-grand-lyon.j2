@@ -1,5 +1,9 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 
-pushd /mnt/data/paperless-ngx
+pushd /mnt/data/paperless-ngx || exit 1
 ./downloader eau-du-grand-lyon -o consume -u '{{downloader_eau_lyon_username}}' -p '{{downloader_eau_lyon_password}}' --headless
+
+status=$?
+curl -X PUT -d 'source=eau-du-grand-lyon' "https://hass.augendre.info/api/webhook/{{ downloader_home_assistant_hook_id }}"
+exit $status

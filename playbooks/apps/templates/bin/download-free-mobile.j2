@@ -1,5 +1,9 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 
-pushd /mnt/data/paperless-ngx
+pushd /mnt/data/paperless-ngx || exit 1
 ./downloader free-mobile -o consume -u '{{downloader_free_mobile_username}}' -p '{{downloader_free_mobile_password}}' --headless --no-interaction
+
+status=$?
+curl -X PUT -d 'source=free-mobile' "https://hass.augendre.info/api/webhook/{{ downloader_home_assistant_hook_id }}"
+exit $status
