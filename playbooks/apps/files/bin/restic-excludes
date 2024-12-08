@@ -28,5 +28,5 @@ whisper-data
 # ghost versions
 versions
 backups/hass
-paperless/data
-paperless/media
+paperless-ngx/data
+paperless-ngx/media
