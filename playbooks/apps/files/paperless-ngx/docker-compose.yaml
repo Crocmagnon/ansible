@@ -58,8 +58,8 @@ services:
     ports:
       - "127.0.0.1:8014:8000"
     volumes:
-      - data:/usr/src/paperless/data
-      - media:/usr/src/paperless/media
+      - ./data:/usr/src/paperless/data
+      - ./media:/usr/src/paperless/media
       - ./export:/usr/src/paperless/export
       - ./consume:/usr/src/paperless/consume
     env_file: docker-compose.env
@@ -102,7 +102,5 @@ services:
       - './consume:/home/ftpuser'
 
 volumes:
-  data:
-  media:
   pgdata:
   redisdata:
