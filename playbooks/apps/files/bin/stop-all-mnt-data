@@ -1,0 +1,3 @@
+#!/bin/bash
+
+systemctl stop docker lyon-transports smbd goatcounter ghost_voyages-coccomagnard-fr.service ghost_gabnotes-org.service ghost_voyages-lois-augendre-info.service
