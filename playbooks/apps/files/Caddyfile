@@ -272,10 +272,10 @@ aio.augendre.info {
 	}
 }
 
-cloud-old.augendre.info {
+stirlingpdf.augendre.info {
 	import common_headers
 	import internal
-	reverse_proxy localhost:9999
+	reverse_proxy localhost:9012
 }
 
 #########################################################

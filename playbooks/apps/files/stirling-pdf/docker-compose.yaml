@@ -1,0 +1,13 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    ports:
+      - '127.0.0.1:9012:8080'
+    volumes:
+      - ./trainingData:/usr/share/tessdata # Required for extra OCR languages
+      - ./extraConfigs:/configs
+    environment:
+      - DOCKER_ENABLE_SECURITY=true
+      - SECURITY_ENABLE_LOGIN=true
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en_GB,fr_FR,en_US
