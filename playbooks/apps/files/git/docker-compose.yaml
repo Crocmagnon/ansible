@@ -8,6 +8,6 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "23730:22" # needs to be open to the box
+      - "23730:22" # needs to be open to the router
       - "127.0.0.1:8006:3000"
     mem_limit: 512m
