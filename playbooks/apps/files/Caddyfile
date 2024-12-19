@@ -2,6 +2,9 @@
 	email gabriel@augendre.info
 	http_port 80
 	https_port 443
+	log {
+		format console
+	}
 }
 
 (common_headers) {
@@ -276,6 +279,13 @@ stirlingpdf.augendre.info {
 	import common_headers
 	import internal
 	reverse_proxy localhost:9012
+}
+
+# ESP Home builder is in network mode host.
+esphome.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:6052
 }
 
 #########################################################
