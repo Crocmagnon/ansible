@@ -29,7 +29,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/ansible/ansible-lint
-    rev: v24.10.0
+    rev: v24.12.2
     hooks:
       - id: ansible-lint
         entry: python3 -m ansiblelint -v --force-color --fix
