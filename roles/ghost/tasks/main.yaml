@@ -5,7 +5,9 @@
     dest: /mnt/data/{{ ghost_site }}/config.production.json
     mode: "0664"
   notify:
-    - Restart service
+    - Restart service {{ ghost_site }}
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
 - name: Ensure service is started {{ ghost_site }}
   ansible.builtin.command:
     cmd: ghost start
