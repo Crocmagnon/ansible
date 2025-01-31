@@ -89,7 +89,7 @@
         name: Download Free Mobile invoice
         minute: 0
         hour: 13
-        day: 30
+        day: 2
         job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-free-mobile
     - name: Cron - Download Eau du Grand Lyon invoice
       ansible.builtin.cron:
