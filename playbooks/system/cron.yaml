@@ -23,6 +23,7 @@
         hour: 6
         weekday: TUE-SAT
         job: /mnt/data/bin/healthcheck ynab /mnt/data/ynab/run-go
+        disabled: true
     - name: Cron - Nextcloud cron
       ansible.builtin.cron:
         name: Nextcloud cron
