@@ -258,12 +258,7 @@ nextcloud-kibana.augendre.info {
 	reverse_proxy localhost:9009
 }
 
-display.augendre.info {
-	import common_headers
-	import internal
-	header Content-Security-Policy "default-src 'self' https://*.augendre.info; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-ancestors https://*.augendre.info; connect-src 'self' https://*.augendre.info https://download.data.grandlyon.com"
-	reverse_proxy localhost:9010
-}
+# port 9010 is available
 
 aio.augendre.info {
 	import common_headers
