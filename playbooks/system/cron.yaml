@@ -16,14 +16,6 @@
         minute: 55
         hour: 4
         job: /mnt/data/bin/healthcheck clean-old-backups /mnt/data/bin/clean-old-backups
-    - name: Cron - YNAB
-      ansible.builtin.cron:
-        name: YNAB
-        minute: 50
-        hour: 6
-        weekday: TUE-SAT
-        job: /mnt/data/bin/healthcheck ynab /mnt/data/ynab/run-go
-        disabled: true
     - name: Cron - Nextcloud cron
       ansible.builtin.cron:
         name: Nextcloud cron

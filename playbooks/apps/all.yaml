@@ -21,4 +21,3 @@
 - import_playbook: voice-pipeline.yaml # noqa: name[play]
 - import_playbook: wallabag.yaml # noqa: name[play]
 - import_playbook: watchtower.yaml # noqa: name[play]
-- import_playbook: ynab.yaml # noqa: name[play]
