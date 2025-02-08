@@ -12,7 +12,6 @@
 - import_playbook: media.yaml # noqa: name[play]
 - import_playbook: miniflux.yaml # noqa: name[play]
 - import_playbook: nextcloud-aio.yaml # noqa: name[play]
-- import_playbook: ollama.yaml # noqa: name[play]
 - import_playbook: paperless-ngx.yaml # noqa: name[play]
 - import_playbook: portainer.yaml # noqa: name[play]
 - import_playbook: privatebin.yaml # noqa: name[play]
