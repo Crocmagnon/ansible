@@ -1,6 +1,0 @@
-#!/bin/bash
-set -euxo pipefail
-pushd /mnt/data/checkout
-docker compose exec django python manage.py clear_all_data
-docker compose exec django python manage.py generate_dummy_baskets
-popd

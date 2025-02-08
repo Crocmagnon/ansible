@@ -59,15 +59,7 @@ charasheet.augendre.info {
 	}
 }
 
-checkout.augendre.info {
-	import common_headers
-	route {
-		file_server /media/* {
-			root /mnt/data/checkout
-		}
-		reverse_proxy localhost:8002
-	}
-}
+# Port 8002 is available
 
 cloud.augendre.info {
 	import common_headers
