@@ -113,3 +113,9 @@
         hour: 13
         day: 15
         job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-octopus
+    - name: Cron - Restart plex container for auto version check
+      ansible.builtin.cron:
+        name: Restart plex container for auto version check
+        minute: 0
+        hour: 8
+        job: /usr/bin/docker compose -f /mnt/data/media/docker-compose.yaml restart plex
