@@ -3,6 +3,12 @@
   hosts: servers
   gather_facts: false
   tasks:
+    - name: Update ghost-cli
+      become: true
+      community.general.npm:
+        global: true
+        name: ghost-cli
+        state: latest
     - name: Setup ghost gabnotes.org
       ansible.builtin.include_role:
         name: ghost
