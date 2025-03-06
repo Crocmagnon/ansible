@@ -5,6 +5,9 @@
 	log {
 		format console
 	}
+
+	import ./dns-ovh.Caddyfile
+	ech ech.augendre.info
 }
 
 (common_headers) {

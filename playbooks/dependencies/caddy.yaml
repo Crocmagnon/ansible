@@ -2,35 +2,34 @@
 - name: Setup caddy
   hosts: servers
   gather_facts: false
-  become: true
   tasks:
-    - name: Install system deps
-      ansible.builtin.apt:
-        pkg:
-          - debian-keyring
-          - debian-archive-keyring
-          - apt-transport-https
-          - gnupg2
-          - curl
-        state: present
-    - name: Add caddy repository
-      ansible.builtin.deb822_repository:
-        name: caddy
-        uris: https://dl.cloudsmith.io/public/caddy/stable/deb/debian
-        signed_by: https://dl.cloudsmith.io/public/caddy/stable/gpg.key
-        components: main
-        suites: any-version
-        types: [deb]
-        state: present
-        enabled: true
-    - name: Install caddy
-      ansible.builtin.apt:
-        update_cache: true
-        name: caddy
-        state: present
+    - name: Install xcaddy
+      ansible.builtin.command:
+        cmd: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
+      register: install
+      changed_when: '"downloading" in install.stdout' # doesn't seem to work
+    - name: Build caddy from source
+      ansible.builtin.command:
+        cmd: xcaddy build v2.10.0-beta.1 --with github.com/caddy-dns/ovh
+        chdir: /tmp
+      changed_when: true
+    - name: Copy new caddy binary
+      ansible.builtin.copy:
+        src: /tmp/caddy
+        dest: /usr/bin/caddy
+        remote_src: true
+        owner: root
+        group: root
+        mode: "0755"
+      become: true
       notify: Restart caddy
+    - name: Cleanup in /tmp
+      ansible.builtin.file:
+        path: /tmp/caddy
+        state: absent
   handlers:
     - name: Restart caddy
       ansible.builtin.service:
         name: caddy
         state: restarted
+      become: true

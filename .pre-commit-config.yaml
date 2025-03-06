@@ -45,4 +45,4 @@ repos:
         name: caddy fmt
         language: system
         entry: caddy fmt --overwrite
-        files: Caddyfile
+        files: ^Caddyfile$
