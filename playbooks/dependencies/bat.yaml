@@ -13,3 +13,29 @@
         src: /usr/bin/batcat
         dest: /home/gaugendre/.local/bin/bat
         state: link
+    - name: Get bat config dir
+      ansible.builtin.command: /usr/bin/batcat --config-dir
+      register: confdir
+      changed_when: false
+      check_mode: false
+    - name: Create bat themes dir
+      ansible.builtin.file:
+        path: "{{ confdir.stdout }}/themes"
+        state: directory
+        mode: "0775"
+    - name: Download Catppuccin themes
+      ansible.builtin.get_url:
+        url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20{{ item }}.tmTheme
+        dest: "{{ confdir.stdout }}/themes/Catppuccin {{ item }}.tmTheme"
+        mode: "0664"
+      notify:
+        - Rebuild bat theme cache
+      loop:
+        - Latte
+        - Mocha
+        - Macchiato
+        - Frappe
+  handlers:
+    - name: Rebuild bat theme cache
+      ansible.builtin.command: /usr/bin/batcat cache --build
+      changed_when: true
