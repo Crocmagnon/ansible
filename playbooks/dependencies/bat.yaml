@@ -1,0 +1,15 @@
+---
+- name: Setup ansible python dependencies
+  hosts: servers
+  gather_facts: false
+  tasks:
+    - name: Install system deps
+      become: true
+      ansible.builtin.apt:
+        pkg:
+          - bat
+    - name: Link batcat to bat
+      ansible.builtin.file:
+        src: /usr/bin/batcat
+        dest: /home/gaugendre/.local/bin/bat
+        state: link

@@ -8,14 +8,6 @@
       ansible.builtin.apt:
         pkg:
           - python3-venv
-          - bat
-    - name: Link batcat to bat
-      ansible.builtin.file:
-        src: /usr/bin/batcat
-        dest: /home/gaugendre/.local/bin/bat
-        owner: gaugendre
-        group: gaugendre
-        state: link
     - name: Setup venv
       # github3.py required by the goatcounter playbook
       ansible.builtin.shell: |
