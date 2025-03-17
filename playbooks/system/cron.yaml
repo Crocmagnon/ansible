@@ -119,3 +119,9 @@
         minute: 0
         hour: 8
         job: /usr/bin/docker compose -f /mnt/data/media/docker-compose.yaml restart plex
+    - name: Cron - Backup pCloud to Backblaze
+      ansible.builtin.cron:
+        name: Backup pCloud to Backblaze
+        minute: 0
+        hour: 4
+        job: /mnt/data/bin/healthcheck pcloud-to-backblaze /mnt/data/bin/pcloud-to-backblaze

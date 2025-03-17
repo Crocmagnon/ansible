@@ -1,0 +1,21 @@
+[pcloud]
+type = pcloud
+token = {"access_token":"{{ rclone_pcloud_access_token }}","token_type":"bearer","expiry":"0001-01-01T00:00:00Z"}
+hostname = eapi.pcloud.com
+username = {{ rclone_pcloud_username}}
+password = {{ rclone_pcloud_obscured_password }}
+
+[backblaze-pcloud-backup]
+type = b2
+account = {{ rclone_backblaze_account }}
+key = {{ rclone_backblaze_key }}
+
+[nextcloud]
+type = webdav
+url = https://cloud.augendre.info/remote.php/dav/files/{{ rclone_nextcloud_username }}
+vendor = nextcloud
+user = {{ rclone_nextcloud_username }}
+pass = {{ rclone_nextcloud_obscured_password }}
+
+[local]
+type = local
