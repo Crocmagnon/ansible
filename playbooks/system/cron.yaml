@@ -10,30 +10,6 @@
         hour: 4
         weekday: SUN
         job: /mnt/data/bin/healthcheck docker-system-prune /mnt/data/bin/docker-system-prune
-    - name: Cron - Clean old backups
-      ansible.builtin.cron:
-        name: clean old backups
-        minute: 55
-        hour: 4
-        job: /mnt/data/bin/healthcheck clean-old-backups /mnt/data/bin/clean-old-backups
-    - name: Cron - Nextcloud cron
-      ansible.builtin.cron:
-        name: Nextcloud cron
-        minute: "*/5"
-        job: /mnt/data/bin/healthcheck nextcloud-cron /mnt/data/bin/nextcloud-cron
-        disabled: true
-    - name: Cron - Nextcloud preview
-      ansible.builtin.cron:
-        name: Nextcloud preview
-        minute: "*/7"
-        job: /mnt/data/bin/healthcheck nextcloud-preview /mnt/data/bin/nextcloud-preview
-        disabled: true
-    - name: Cron - Nextcloud update apps
-      ansible.builtin.cron:
-        name: Nextcloud update apps
-        special_time: daily
-        job: /mnt/data/bin/healthcheck nextcloud-auto-update /mnt/data/bin/nextcloud-auto-update
-        disabled: true
     - name: Cron - Dump manuels
       ansible.builtin.cron:
         name: Dump manuels
@@ -49,12 +25,6 @@
         name: Dump miniflux
         minute: 50
         job: /mnt/data/bin/healthcheck dump-miniflux /mnt/data/bin/dump-miniflux
-    - name: Cron - Dump nextcloud
-      ansible.builtin.cron:
-        name: Dump nextcloud
-        minute: 52
-        job: /mnt/data/bin/healthcheck dump-nextcloud /mnt/data/bin/dump-nextcloud
-        disabled: true
     - name: Cron - Dump voyages.coccomagnard.fr
       ansible.builtin.cron:
         name: Dump voyages.coccomagnard.fr
@@ -106,13 +76,6 @@
         hour: 13
         day: 10
         job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-lcl-checking
-    - name: Cron - Download Octopus Energy proof of address
-      ansible.builtin.cron:
-        name: Download Octopus Energy proof of address
-        minute: 0
-        hour: 13
-        day: 15
-        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-octopus
     - name: Cron - Restart plex container for auto version check
       ansible.builtin.cron:
         name: Restart plex container for auto version check

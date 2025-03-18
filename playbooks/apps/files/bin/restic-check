@@ -1,4 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-source /mnt/data/bin/resticenv
-/usr/bin/restic check --read-data-subset=700M

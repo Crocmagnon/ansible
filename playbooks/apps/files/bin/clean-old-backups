@@ -1,3 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-find /mnt/data/backups/hass/* -mtime +5 -delete

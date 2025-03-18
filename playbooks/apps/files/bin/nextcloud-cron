@@ -1,3 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-/usr/bin/docker compose -f /mnt/data/nextcloud/docker-compose.yaml exec -dT --user www-data nextcloud php cron.php
