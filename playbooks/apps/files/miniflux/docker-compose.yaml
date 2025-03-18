@@ -17,3 +17,9 @@ services:
     volumes:
       - ./db_data:/var/lib/postgresql/data
     mem_limit: 512m
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "miniflux"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 80s
