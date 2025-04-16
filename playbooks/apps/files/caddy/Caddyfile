@@ -293,7 +293,7 @@ mail.augendre.info {
 
 cv-gabriel.augendre.info {
 	import common_headers
-	redir https://cloud.augendre.info/s/LpcSwsygEFRsXFD/download permanent
+	redir https://e.pcloud.link/publink/show?code=XZVYidZt0r7H6wbWThqi1xlWOQnCjHKfcrV permanent
 }
 
 blog.augendre.info gabriel.augendre.info www.gabnotes.org {
