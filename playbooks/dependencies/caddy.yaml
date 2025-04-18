@@ -10,7 +10,8 @@
       changed_when: '"downloading" in install.stdout' # doesn't seem to work
     - name: Build caddy from source
       ansible.builtin.command:
-        cmd: xcaddy build latest --with github.com/caddy-dns/ovh
+        # Stick with v2.10.0-beta.4 until https://github.com/libdns/ovh/issues/2 is resolved.
+        cmd: xcaddy build v2.10.0-beta.4 --with github.com/caddy-dns/ovh
         chdir: /tmp
       changed_when: true
     - name: Copy new caddy binary
