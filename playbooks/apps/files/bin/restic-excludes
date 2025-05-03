@@ -30,3 +30,4 @@ versions
 backups/hass
 paperless-ngx/data
 paperless-ngx/media
+.esphome
