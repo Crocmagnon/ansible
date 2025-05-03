@@ -1,0 +1,3 @@
+#!/bin/bash
+set -euo pipefail
+/usr/bin/rclone sync --stats=30m --stats-log-level=NOTICE --transfers=10 --checksum pcloud-gab:/ ovh-pcloud-sync:gabriel/

@@ -1,14 +1,25 @@
-[pcloud]
+[pcloud-gab]
 type = pcloud
-token = {"access_token":"{{ rclone_pcloud_access_token }}","token_type":"bearer","expiry":"0001-01-01T00:00:00Z"}
+token = {"access_token":"{{ rclone_pcloud_gab_access_token }}","token_type":"bearer","expiry":"0001-01-01T00:00:00Z"}
 hostname = eapi.pcloud.com
-username = {{ rclone_pcloud_username}}
-password = {{ rclone_pcloud_obscured_password }}
+username = {{ rclone_pcloud_gab_username}}
+password = {{ rclone_pcloud_gab_obscured_password }}
 
 [backblaze-pcloud-backup]
 type = b2
 account = {{ rclone_backblaze_account }}
 key = {{ rclone_backblaze_key }}
+
+[ovh-pcloud-sync]
+type = s3
+provider = Other
+env_auth = false
+access_key_id = {{ rclone_ovh_s3_sync_pcloud_access_key_id }}
+secret_access_key = {{ rclone_ovh_s3_sync_pcloud_secret_key }}
+acl = private
+region = gra
+location_constraint = gra
+endpoint = https://s3.gra.io.cloud.ovh.net/
 
 [local]
 type = local

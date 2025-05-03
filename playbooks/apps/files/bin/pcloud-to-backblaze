@@ -1,3 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-/usr/bin/rclone sync --stats=30m --stats-log-level=NOTICE --transfers=10 --checksum pcloud:/ backblaze-pcloud-backup:gaugendre-pcloud-backup/
