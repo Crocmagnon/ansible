@@ -62,12 +62,7 @@ charasheet.augendre.info {
 	}
 }
 
-# Port 8002 is available
-
-cloud.augendre.info {
-	import common_headers
-	reverse_proxy localhost:8003
-}
+# Ports 8002-8003 are available
 
 gc.gabnotes.org, gc.augendre.info, static.gc.augendre.info, voyages.gc.coccomagnard.fr {
 	import common_headers
@@ -247,23 +242,7 @@ test.augendre.info {
 	reverse_proxy localhost:9008
 }
 
-nextcloud-kibana.augendre.info {
-	import common_headers
-	import internal
-	reverse_proxy localhost:9009
-}
-
-# port 9010 is available
-
-aio.augendre.info {
-	import common_headers
-	import internal
-	reverse_proxy https://localhost:9011 {
-		transport http {
-			tls_insecure_skip_verify
-		}
-	}
-}
+# ports 9009-9011 are available
 
 stirlingpdf.augendre.info {
 	import common_headers
@@ -283,7 +262,7 @@ esphome.augendre.info {
 #########################################################
 mariage.augendre.info {
 	import common_headers
-	redir https://cloud.augendre.info/s/bLcf3C8LzcSo8AR
+	redir https://e.pcloud.link/publink/show?code=kZAG2qZWQWJbKTUgJ0DjeFn0cmcDhr48S2V
 }
 
 mail.augendre.info {

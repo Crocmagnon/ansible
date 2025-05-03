@@ -10,12 +10,5 @@ type = b2
 account = {{ rclone_backblaze_account }}
 key = {{ rclone_backblaze_key }}
 
-[nextcloud]
-type = webdav
-url = https://cloud.augendre.info/remote.php/dav/files/{{ rclone_nextcloud_username }}
-vendor = nextcloud
-user = {{ rclone_nextcloud_username }}
-pass = {{ rclone_nextcloud_obscured_password }}
-
 [local]
 type = local
