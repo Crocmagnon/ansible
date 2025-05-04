@@ -25,10 +25,12 @@
     - name: Set listen_addresses
       become: true
       become_user: postgres
-      community.postgresql.postgresql_set:
-        name: listen_addresses
+      community.postgresql.postgresql_alter_system:
+        param: listen_addresses
         value: "localhost,172.17.0.1"
-    # notify: Restart postgres # commented because this always results in a change.
+      register: alter
+      changed_when: "alter.restart_required"
+      notify: Restart postgres
     - name: Grant all users from docker subnet
       become: true
       community.postgresql.postgresql_pg_hba:
