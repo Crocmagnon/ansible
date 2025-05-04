@@ -37,21 +37,10 @@ services:
     volumes:
       - redisdata:/data
 
-  db:
-    image: docker.io/library/postgres:16
-    restart: unless-stopped
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: paperless
-      POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
-
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     depends_on:
-      - db
       - broker
       - gotenberg
       - tika
@@ -65,10 +54,12 @@ services:
     env_file: docker-compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
-      PAPERLESS_DBHOST: db
+      PAPERLESS_DBHOST: host.docker.internal
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   gotenberg:
     image: docker.io/gotenberg/gotenberg:8.7

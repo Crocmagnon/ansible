@@ -3,12 +3,32 @@
   hosts: servers
   gather_facts: false
   tasks:
+    - name: Create DB user
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "paperless"
+        password: "{{ pg_password }}"
+    - name: Create a new database
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "paperless"
+        owner: "paperless"
     - name: Docker
       ansible.builtin.include_role:
         name: docker
 
   vars:
+    ansible_python_interpreter: /tmp/ansible/bin/python
     docker_app_name: paperless-ngx
+    pg_password: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      65336632303364663134303066613663643062323933306466616433376333316531636562613330
+      6464633966613636353936643036663731333130643136300a383732393732396633633838623665
+      30326538663232316335636235353066656561393730336662383565353161376436313962663263
+      3230636363383436360a656162306235633538316439386163386663383335313065376564333764
+      38616562653239393930353465383433633463666334643436303763646464623161
     secret_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       64383236316239323137333136366331663735383465303031383539306566623164653437613132
