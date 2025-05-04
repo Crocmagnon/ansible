@@ -14,7 +14,7 @@
         if [ -x /tmp/ansible/bin/python ] && [ -x /tmp/ansible/bin/pip ] ; then exit 123; fi
         rm -rf /tmp/ansible
         /usr/bin/python3 -m venv /tmp/ansible
-        /tmp/ansible/bin/pip install --upgrade 'github3.py >= 1.0.0a3'
+        /tmp/ansible/bin/pip install --upgrade 'github3.py >= 1.0.0a3' 'psycopg2-binary >= 2.5.1'
       args:
         executable: /bin/bash
       register: venv

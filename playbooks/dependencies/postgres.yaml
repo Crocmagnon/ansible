@@ -1,0 +1,50 @@
+---
+# https://documentation.ubuntu.com/server/how-to/databases/install-postgresql/index.html
+# https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html
+- name: Setup system postgres
+  hosts: servers
+  gather_facts: false
+  tasks:
+    - name: Install system deps
+      become: true
+      ansible.builtin.apt:
+        pkg:
+          - postgresql
+    - name: Setup password for postgres user
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: postgres
+        password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          31313563343232316238613035653730393336313664306533393736373766653861306139633131
+          6536333634613230303732306632663635363934333533320a656261386361646639623034656565
+          61306232643466623561393930326533616263373133333730363035373062366339356630373063
+          3462363365383764310a363237613130616438373130623765636565323632353831663635646638
+          36636264623330623635643935363065373533643230653835343231306662656230
+    - name: Set listen_addresses
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_set:
+        name: listen_addresses
+        value: "localhost,172.17.0.1"
+      #notify: Restart postgres # commented because this always results in a change.
+    - name: Grant all users from docker subnet
+      become: true
+      community.postgresql.postgresql_pg_hba:
+        dest: /etc/postgresql/16/main/pg_hba.conf
+        contype: host
+        users: all
+        source: 172.0.0.0/8
+        databases: all
+        method: scram-sha-256
+      notify: Restart postgres
+  handlers:
+    - name: Restart postgres
+      ansible.builtin.service:
+        name: postgresql
+        state: restarted
+      become: true
+
+  vars:
+    ansible_python_interpreter: /tmp/ansible/bin/python

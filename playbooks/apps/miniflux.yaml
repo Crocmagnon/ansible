@@ -3,11 +3,25 @@
   hosts: servers
   gather_facts: false
   tasks:
+    - name: Create a new database
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ docker_app_name }}"
+        owner: "{{ docker_app_name }}"
+    - name: Create DB user
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        login_db: "{{ docker_app_name }}"
+        name: "{{ docker_app_name }}"
+        password: "{{ db_password }}"
     - name: Docker
       ansible.builtin.include_role:
         name: docker
 
   vars:
+    ansible_python_interpreter: /tmp/ansible/bin/python
     docker_app_name: miniflux
     db_password: !vault |
       $ANSIBLE_VAULT;1.1;AES256
