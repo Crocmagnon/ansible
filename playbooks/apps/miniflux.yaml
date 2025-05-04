@@ -3,19 +3,18 @@
   hosts: servers
   gather_facts: false
   tasks:
+    - name: Create DB user
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "{{ docker_app_name }}"
+        password: "{{ db_password }}"
     - name: Create a new database
       become: true
       become_user: postgres
       community.postgresql.postgresql_db:
         name: "{{ docker_app_name }}"
         owner: "{{ docker_app_name }}"
-    - name: Create DB user
-      become: true
-      become_user: postgres
-      community.postgresql.postgresql_user:
-        login_db: "{{ docker_app_name }}"
-        name: "{{ docker_app_name }}"
-        password: "{{ db_password }}"
     - name: Docker
       ansible.builtin.include_role:
         name: docker

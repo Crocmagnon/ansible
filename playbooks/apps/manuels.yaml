@@ -3,11 +3,24 @@
   hosts: servers
   gather_facts: false
   tasks:
+    - name: Create DB user
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "{{ docker_app_name }}"
+        password: "{{ pg_password }}"
+    - name: Create a new database
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ docker_app_name }}"
+        owner: "{{ docker_app_name }}"
     - name: Docker
       ansible.builtin.include_role:
         name: docker
 
   vars:
+    ansible_python_interpreter: /tmp/ansible/bin/python
     docker_app_name: manuels
     secret_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256

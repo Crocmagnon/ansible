@@ -5,26 +5,11 @@ services:
       - .env
     volumes:
       - ./media:/app/media
-    depends_on:
-      - db
     restart: always
     init: true
     tty: true
     mem_limit: 512m
     ports:
       - "127.0.0.1:8012:8000"
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: "{{ pg_password }}"
-      POSTGRES_USER: "manuels"
-      POSTGRES_DB: "manuels"
-    volumes:
-      - ./db_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-d", "manuels"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 80s
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
