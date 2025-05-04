@@ -3,8 +3,6 @@ services:
     image: miniflux/miniflux:latest
     restart: always
     env_file: miniflux.env
-    depends_on:
-      - db
     healthcheck:
       test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
     mem_limit: 512m
