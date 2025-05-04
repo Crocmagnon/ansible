@@ -28,7 +28,7 @@
       community.postgresql.postgresql_set:
         name: listen_addresses
         value: "localhost,172.17.0.1"
-      #notify: Restart postgres # commented because this always results in a change.
+    # notify: Restart postgres # commented because this always results in a change.
     - name: Grant all users from docker subnet
       become: true
       community.postgresql.postgresql_pg_hba:
