@@ -9,6 +9,7 @@
     - name: Setup .pgpass
       ansible.builtin.lineinfile:
         path: /home/gaugendre/.pgpass
+        create: true
         owner: gaugendre
         group: gaugendre
         mode: "0600"
