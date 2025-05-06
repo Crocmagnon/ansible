@@ -1,3 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-sudo -u postgres pg_dump -Fc manuels > /mnt/data/manuels/db_export/backup.dump

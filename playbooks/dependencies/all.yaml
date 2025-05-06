@@ -3,5 +3,4 @@
 - import_playbook: 01-setup-deps.yaml # noqa: name[play]
 - import_playbook: bat.yaml # noqa: name[play]
 - import_playbook: caddy.yaml # noqa: name[play]
-- import_playbook: postgres.yaml # noqa: name[play]
 - import_playbook: rclone.yaml # noqa: name[play]
