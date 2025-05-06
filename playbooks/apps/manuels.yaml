@@ -6,6 +6,14 @@
     - name: Docker
       ansible.builtin.include_role:
         name: docker
+    - name: Setup .pgpass
+      ansible.builtin.lineinfile:
+        path: /home/gaugendre/.pgpass
+        owner: gaugendre
+        group: gaugendre
+        mode: "0600"
+        regexp: "^ag56382-001.eu.clouddb.ovh.net:35458:{{ docker_app_name }}:{{ docker_app_name }}:"
+        line: "ag56382-001.eu.clouddb.ovh.net:35458:{{ docker_app_name }}:{{ docker_app_name }}:{{ pg_password }}"
 
   vars:
     docker_app_name: manuels

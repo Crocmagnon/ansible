@@ -1,0 +1,3 @@
+#!/bin/bash
+set -euo pipefail
+pg_dump -h ag56382-001.eu.clouddb.ovh.net -p 35458 -U manuels -Fc manuels > /mnt/data/manuels/db_export/backup.dump

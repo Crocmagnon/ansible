@@ -10,11 +10,21 @@
         hour: 4
         weekday: SUN
         job: /mnt/data/bin/healthcheck docker-system-prune /mnt/data/bin/docker-system-prune
+    - name: Cron - Dump manuels
+      ansible.builtin.cron:
+        name: Dump manuels
+        minute: 45
+        job: /mnt/data/bin/healthcheck dump-manuels /mnt/data/bin/dump-manuels
     - name: Cron - Dump paperless
       ansible.builtin.cron:
         name: Dump paperless
         minute: 47
         job: /mnt/data/bin/healthcheck dump-paperless /mnt/data/bin/dump-paperless
+    - name: Cron - Dump miniflux
+      ansible.builtin.cron:
+        name: Dump miniflux
+        minute: 50
+        job: /mnt/data/bin/healthcheck dump-miniflux /mnt/data/bin/dump-miniflux
     - name: Cron - Dump voyages.coccomagnard.fr
       ansible.builtin.cron:
         name: Dump voyages.coccomagnard.fr
