@@ -1,0 +1,10 @@
+---
+- name: Simple packages
+  hosts: servers
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install tools
+      ansible.builtin.apt:
+        pkg:
+          - fish
