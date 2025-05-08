@@ -3,6 +3,6 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/gaugendre/.docker/config.json:/config.json
+      - {{ ansible_env.HOME }}/.docker/config.json:/config.json
       - /etc/localtime:/etc/localtime:ro
     command: --interval 86400 --cleanup --include-restarting

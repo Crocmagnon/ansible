@@ -1,6 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-killall restic || true
-source /mnt/data/bin/resticenv
-/usr/bin/restic unlock
-/usr/bin/restic backup --exclude-file /mnt/data/bin/restic-excludes /mnt/data/ /var/spool/cron/ $@

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 killall restic || true
-source /mnt/data/bin/resticenv
+source {{ deploy_dir }}/bin/resticenv
 /usr/bin/restic unlock
 /usr/bin/restic forget --prune --keep-within-hourly 1d --keep-within-daily 7d --keep-within-weekly 1m --keep-within-monthly 6m

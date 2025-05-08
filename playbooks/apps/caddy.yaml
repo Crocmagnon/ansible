@@ -12,8 +12,8 @@
         owner: root
         group: root
     - name: Write Caddyfile
-      ansible.builtin.copy:
-        src: files/caddy/Caddyfile
+      ansible.builtin.template:
+        src: files/caddy/Caddyfile.j2
         dest: /etc/caddy/Caddyfile
         mode: "0644"
         owner: root

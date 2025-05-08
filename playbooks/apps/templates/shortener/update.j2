@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euxo pipefail
-pushd /mnt/data/shortener
+pushd {{ deploy_dir }}/shortener
 docker compose --ansi never pull
 docker compose --ansi never up -d
 popd

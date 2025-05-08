@@ -1,12 +1,12 @@
 ---
 - name: Bin files & scripts
-  hosts: servers
-  gather_facts: false
+  hosts: common
+  #  gather_facts: false
   tasks:
     - name: Write bin files
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: /mnt/data/bin/
+        dest: "{{ deploy_dir }}/bin/"
         mode: preserve
       with_fileglob:
         - files/bin/*
@@ -15,7 +15,7 @@
     - name: Template bin files
       ansible.builtin.template:
         src: "{{ item }}"
-        dest: /mnt/data/bin/{{ item | basename | regex_replace('\.j2$', '') }}
+        dest: "{{ deploy_dir }}/bin/{{ item | basename | regex_replace('\\.j2$', '') }}"
         mode: preserve
       with_fileglob:
         - templates/bin/*.j2

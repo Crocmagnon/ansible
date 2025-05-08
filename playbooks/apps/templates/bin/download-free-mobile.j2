@@ -1,7 +1,7 @@
 #!/bin/bash
 set -uo pipefail
 
-pushd /mnt/data/paperless-ngx || exit 1
+pushd {{ deploy_dir }}/paperless-ngx || exit 1
 ./downloader free-mobile -o consume -u '{{downloader_free_mobile_username}}' -p '{{downloader_free_mobile_password}}' --headless --no-interaction
 
 status=$?

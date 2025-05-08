@@ -9,51 +9,51 @@
         minute: 0
         hour: 4
         weekday: SUN
-        job: /mnt/data/bin/healthcheck docker-system-prune /mnt/data/bin/docker-system-prune
+        job: "{{ deploy_dir }}/bin/healthcheck docker-system-prune {{ deploy_dir }}/bin/docker-system-prune"
     - name: Cron - Dump manuels
       ansible.builtin.cron:
         name: Dump manuels
         minute: 45
-        job: /mnt/data/bin/healthcheck dump-manuels /mnt/data/bin/dump-manuels
+        job: "{{ deploy_dir }}/bin/healthcheck dump-manuels {{ deploy_dir }}/bin/dump-manuels"
     - name: Cron - Dump paperless
       ansible.builtin.cron:
         name: Dump paperless
         minute: 47
-        job: /mnt/data/bin/healthcheck dump-paperless /mnt/data/bin/dump-paperless
+        job: "{{ deploy_dir }}/bin/healthcheck dump-paperless {{ deploy_dir }}/bin/dump-paperless"
     - name: Cron - Dump miniflux
       ansible.builtin.cron:
         name: Dump miniflux
         minute: 50
-        job: /mnt/data/bin/healthcheck dump-miniflux /mnt/data/bin/dump-miniflux
+        job: "{{ deploy_dir }}/bin/healthcheck dump-miniflux {{ deploy_dir }}/bin/dump-miniflux"
     - name: Cron - Dump voyages.coccomagnard.fr
       ansible.builtin.cron:
         name: Dump voyages.coccomagnard.fr
         minute: 55
-        job: /mnt/data/bin/healthcheck dump-voyages-coccomagnard-fr /mnt/data/bin/dump-voyages.coccomagnard.fr
+        job: "{{ deploy_dir }}/bin/healthcheck dump-voyages-coccomagnard-fr {{ deploy_dir }}/bin/dump-voyages.coccomagnard.fr"
     - name: Cron - Dump gabnotes.org
       ansible.builtin.cron:
         name: Dump gabnotes.org
         minute: 56
-        job: /mnt/data/bin/healthcheck dump-gabnotes-org /mnt/data/bin/dump-gabnotes.org
+        job: "{{ deploy_dir }}/bin/healthcheck dump-gabnotes-org {{ deploy_dir }}/bin/dump-gabnotes.org"
     - name: Cron - Dump voyages-lois.augendre.info
       ansible.builtin.cron:
         name: Dump voyages-lois.augendre.info
         minute: 57
-        job: /mnt/data/bin/healthcheck dump-voyages-lois-augendre-info /mnt/data/bin/dump-voyages-lois.augendre.info
+        job: "{{ deploy_dir }}/bin/healthcheck dump-voyages-lois-augendre-info {{ deploy_dir }}/bin/dump-voyages-lois.augendre.info"
     - name: Cron - Download Freebox invoice
       ansible.builtin.cron:
         name: Download Freebox invoice
         minute: 0
         hour: 13
         day: 5
-        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-freebox
+        job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-freebox"
     - name: Cron - Download Free Mobile invoice
       ansible.builtin.cron:
         name: Download Free Mobile invoice
         minute: 0
         hour: 13
         day: 2
-        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-free-mobile
+        job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-free-mobile"
     - name: Cron - Download Eau du Grand Lyon invoice
       ansible.builtin.cron:
         name: Download Eau du Grand Lyon invoice
@@ -61,30 +61,30 @@
         hour: 13
         day: 10
         month: "6,12"
-        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-eau-du-grand-lyon
+        job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-eau-du-grand-lyon"
     - name: Cron - Download Shiva payslip
       ansible.builtin.cron:
         name: Download Shiva payslip
         minute: 0
         hour: 13
         day: 10
-        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-shiva
+        job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-shiva"
     - name: Cron - Download LCL bank statement
       ansible.builtin.cron:
         name: Download LCL bank statement
         minute: 0
         hour: 13
         day: 10
-        job: /mnt/data/bin/healthcheck downloader /mnt/data/bin/download-lcl-checking
+        job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-lcl-checking"
     - name: Cron - Restart plex container for auto version check
       ansible.builtin.cron:
         name: Restart plex container for auto version check
         minute: 0
         hour: 8
-        job: /usr/bin/docker compose -f /mnt/data/media/docker-compose.yaml restart plex
+        job: /usr/bin/docker compose -f {{ deploy_dir }}/media/docker-compose.yaml restart plex
     - name: Cron - Sync pCloud
       ansible.builtin.cron:
         name: Sync pCloud
         minute: 0
         hour: 4
-        job: /mnt/data/bin/healthcheck sync-pcloud /mnt/data/bin/sync-pcloud
+        job: "{{ deploy_dir }}/bin/healthcheck sync-pcloud {{ deploy_dir }}/bin/sync-pcloud"

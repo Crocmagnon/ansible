@@ -38,7 +38,7 @@ static.augendre.info {
 	import common_headers
 	header * Cache-Control "max-age=300"
 	file_server * {
-		root /mnt/data/caddy/static
+		root {{ deploy_dir }}/caddy/static
 		hide .*
 	}
 }
@@ -55,7 +55,7 @@ charasheet.augendre.info {
 	import common_headers
 	route {
 		file_server /media/* {
-			root /mnt/data/charasheet/data
+			root {{ deploy_dir }}/charasheet/data
 		}
 		reverse_proxy localhost:8001
 	}
@@ -184,7 +184,7 @@ internal-static.augendre.info {
 	import internal
 	header * Cache-Control "max-age=300"
 	file_server * {
-		root /mnt/data/caddy/internal-static
+		root {{ deploy_dir }}/caddy/internal-static
 		hide .*
 		browse
 	}

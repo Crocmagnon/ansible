@@ -1,7 +1,7 @@
 #!/bin/bash
 set -uo pipefail
 
-pushd /mnt/data/paperless-ngx || exit 1
+pushd {{ deploy_dir }}/paperless-ngx || exit 1
 ./downloader octopus-energy-address -o consume -u '{{downloader_octopus_username}}' -p '{{downloader_octopus_password}}' --headless
 
 status=$?

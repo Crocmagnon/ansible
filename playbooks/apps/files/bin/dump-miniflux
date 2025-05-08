@@ -1,3 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-pg_dump -h ag56382-001.eu.clouddb.ovh.net -p 35458 -U miniflux -Fc miniflux > /mnt/data/miniflux/db_export/backup.dump

@@ -31,7 +31,7 @@
         daemon_reload: true
 
   vars:
-    dir: /mnt/data/lyon-transports
+    dir: "{{ deploy_dir }}/lyon-transports"
     lyon_transports_password: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       35356364616633356164376433623139333165626433303437666266613762643239373730616131

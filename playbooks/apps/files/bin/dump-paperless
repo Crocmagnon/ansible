@@ -1,3 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-/usr/bin/docker compose -f /mnt/data/paperless-ngx/docker-compose.yaml exec -T webserver document_exporter ../export --delete --no-archive --no-thumbnail --split-manifest --no-progress-bar

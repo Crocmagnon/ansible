@@ -59,7 +59,7 @@
 
   vars:
     ansible_python_interpreter: /tmp/ansible/bin/python
-    dir: /mnt/data/goatcounter
+    dir: "{{ deploy_dir }}/goatcounter"
     gc_mailgun_api_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       31386237653033306338393237353961396535363061363931643863653461333631376365663338

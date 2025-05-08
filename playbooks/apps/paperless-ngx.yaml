@@ -8,10 +8,8 @@
         name: docker
     - name: Setup .pgpass
       ansible.builtin.lineinfile:
-        path: /home/gaugendre/.pgpass
+        path: "{{ ansible_env.HOME }}/.pgpass"
         create: true
-        owner: gaugendre
-        group: gaugendre
         mode: "0600"
         regexp: "^ag56382-001.eu.clouddb.ovh.net:35458:paperless:paperless:"
         line: "ag56382-001.eu.clouddb.ovh.net:35458:paperless:paperless:{{ pg_password }}"

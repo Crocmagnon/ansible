@@ -8,20 +8,20 @@
       ansible.builtin.cron:
         name: restic backup
         minute: 0
-        job: /mnt/data/bin/healthcheck restic-backup /mnt/data/bin/restic-backup
+        job: "{{ deploy_dir }}/bin/healthcheck restic-backup {{ deploy_dir }}/bin/restic-backup"
     - name: Cron - Restic prune
       ansible.builtin.cron:
         name: restic prune
         minute: 30
         hour: "*/3"
-        job: /mnt/data/bin/healthcheck restic-prune /mnt/data/bin/restic-prune
+        job: "{{ deploy_dir }}/bin/healthcheck restic-prune {{ deploy_dir }}/bin/restic-prune"
     - name: Cron - SMART short
       ansible.builtin.cron:
         name: SMART short
         special_time: weekly
-        job: /mnt/data/bin/smartshort
+        job: "{{ deploy_dir }}/bin/smartshort"
     - name: Cron - SMART long
       ansible.builtin.cron:
         name: SMART long
         special_time: monthly
-        job: /mnt/data/bin/smartlong
+        job: "{{ deploy_dir }}/bin/smartlong"

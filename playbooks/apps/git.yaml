@@ -16,7 +16,7 @@
 
   vars:
     docker_app_name: git
-    dir: /mnt/data/{{ docker_app_name }}
+    dir: "{{ deploy_dir }}/{{ docker_app_name }}"
     lfs_jwt_secret: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       34656631616165623233353835386162343837363230366136303764613334323262313233616462

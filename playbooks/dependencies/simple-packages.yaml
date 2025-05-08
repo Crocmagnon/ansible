@@ -1,7 +1,6 @@
 ---
 - name: Simple packages
-  hosts: servers
-  gather_facts: false
+  hosts: common
   become: true
   tasks:
     - name: Install tools

@@ -1,7 +1,6 @@
 ---
 - name: Setup rclone
-  hosts: servers
-  gather_facts: false
+  hosts: common
   tasks:
     - name: Install system deps
       become: true
@@ -10,16 +9,14 @@
           - rclone
     - name: Create rclone config dir
       ansible.builtin.file:
-        path: /home/gaugendre/.config/rclone/
+        path: "{{ ansible_env.HOME }}/.config/rclone/"
         state: directory
         mode: "0775"
     - name: Write rclone.conf
       ansible.builtin.template:
         src: templates/rclone/rclone.conf.j2
-        dest: /home/gaugendre/.config/rclone/rclone.conf
+        dest: "{{ ansible_env.HOME }}/.config/rclone/rclone.conf"
         mode: "0600"
-        owner: gaugendre
-        group: gaugendre
   vars:
     rclone_pcloud_gab_access_token: !vault |
       $ANSIBLE_VAULT;1.1;AES256

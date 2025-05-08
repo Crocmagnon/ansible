@@ -1,7 +1,6 @@
 ---
 - name: Install Tailscale
-  hosts: servers
-  gather_facts: false
+  hosts: common
   become: true
   tasks:
     - name: Download Tailscale GPG Key

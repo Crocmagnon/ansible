@@ -1,7 +1,6 @@
 ---
 - name: Setup psql client
-  hosts: servers
-  gather_facts: false
+  hosts: common
   tasks:
     - name: Install system deps
       become: true

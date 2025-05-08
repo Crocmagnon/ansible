@@ -1,7 +1,7 @@
 #!/bin/bash
 set -uo pipefail
 
-pushd /mnt/data/paperless-ngx || exit 1
+pushd {{ deploy_dir }}/paperless-ngx || exit 1
 ./downloader shiva -o consume -u '{{downloader_shiva_username}}' -p '{{downloader_shiva_password}}' --headless
 
 status=$?
