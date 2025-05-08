@@ -7,3 +7,5 @@
       ansible.builtin.apt:
         pkg:
           - fish
+          - unzip
+          - zip
