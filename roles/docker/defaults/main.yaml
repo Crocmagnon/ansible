@@ -1,6 +1,6 @@
 ---
 docker_app_name: some-app
-docker_dir: /mnt/data/{{ docker_app_name }}
+docker_dir: "{{ deploy_dir }}/{{ docker_app_name }}"
 docker_build: policy
 docker_remove_orphans: true
 docker_create_dir: true

@@ -1,9 +1,16 @@
 ---
 - name: Update caddy config
-  hosts: servers
+  hosts: common
   gather_facts: false
   become: true
   tasks:
+    - name: Create caddy dir
+      ansible.builtin.file:
+        path: "/etc/caddy"
+        state: directory
+        mode: "0755"
+        owner: root
+        group: root
     - name: Write Caddyfile
       ansible.builtin.copy:
         src: files/caddy/Caddyfile

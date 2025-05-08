@@ -7,7 +7,6 @@
 	}
 
 	import ./dns-ovh.Caddyfile
-	ech ech.augendre.info
 }
 
 (common_headers) {

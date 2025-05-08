@@ -1,16 +1,50 @@
 ---
 - name: Setup caddy
-  hosts: servers
-  gather_facts: false
+  hosts: common
   tasks:
+    - name: Create caddy group
+      become: true
+      ansible.builtin.group:
+        name: caddy
+        system: true
+    - name: Create caddy user
+      become: true
+      ansible.builtin.user:
+        name: caddy
+        system: true
+        group: caddy
+        create_home: true
+        home: /var/lib/caddy
+        shell: /usr/sbin/nologin
+        comment: Caddy web server
+    - name: Write service file
+      become: true
+      ansible.builtin.copy:
+        src: files/caddy.service
+        dest: /etc/systemd/system/caddy.service
+        mode: "0600"
+        owner: root
+        group: root
+      notify:
+        - Restart caddy
+    - name: Ensure go is installed
+      become: true
+      ansible.builtin.apt:
+        pkg:
+          - golang-go
     - name: Install xcaddy
       ansible.builtin.command:
         cmd: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
       register: install
       changed_when: '"downloading" in install.stdout' # doesn't seem to work
+    - name: Get GOPATH
+      ansible.builtin.command:
+        cmd: go env GOPATH
+      register: gopath
+      changed_when: false
     - name: Build caddy from source
       ansible.builtin.command:
-        cmd: xcaddy build --with github.com/caddy-dns/ovh
+        cmd: "{{ gopath.stdout }}/bin/xcaddy build --with github.com/caddy-dns/ovh"
         chdir: /tmp
       changed_when: true
     - name: Copy new caddy binary
@@ -32,4 +66,6 @@
       ansible.builtin.service:
         name: caddy
         state: restarted
+        enabled: true
+        daemon_reload: true
       become: true
