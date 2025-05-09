@@ -12,7 +12,7 @@ common:
       ansible_user: gaugendre
       # ansible_ssh_private_key_file: "{{ lookup('env', 'KEY_FILE') }}"
       ansible_python_interpreter: auto_silent
-      # ansible_ssh_common_args: -o StrictHostKeyChecking=no
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
       deploy_dir: /mnt/data
       restic_access_key_id: !vault |
         $ANSIBLE_VAULT;1.1;AES256
@@ -45,6 +45,7 @@ common:
       ansible_user: ubuntu
       ansible_python_interpreter: auto_silent
       deploy_dir: /home/ubuntu/deploy
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
       restic_access_key_id: !vault |
         $ANSIBLE_VAULT;1.1;AES256
         31396336386334623132396462353961653834666565356133653765623166393337356366303463
