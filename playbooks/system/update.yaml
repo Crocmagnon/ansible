@@ -1,6 +1,6 @@
 ---
 - name: Update system
-  hosts: servers
+  hosts: common
   gather_facts: false
   become: true
   tasks:
