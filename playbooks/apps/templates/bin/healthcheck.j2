@@ -5,7 +5,7 @@ BASE_URL="https://hc-ping.com/{{ healthcheck_webhook_token }}/$1"
 START_URL="$BASE_URL/start?rid=$RID"
 shift
 
-curl -A "ubuntu-vm" -fsS --retry 5 -o /dev/null $START_URL
+curl -A "$(hostname)" -fsS --retry 5 -o /dev/null $START_URL
 logs=$($@ 2>&1)
 status=$?
-curl -A "ubuntu-vm" -fsS --retry 5 --data-raw "$logs" -o /dev/null "$BASE_URL/$status?rid=$RID"
+curl -A "$(hostname)" -fsS --retry 5 --data-raw "$logs" -o /dev/null "$BASE_URL/$status?rid=$RID"
