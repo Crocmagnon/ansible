@@ -1,7 +1,6 @@
 ---
 - name: Manuels
   hosts: common
-  gather_facts: false
   tasks:
     - name: Docker
       ansible.builtin.include_role:

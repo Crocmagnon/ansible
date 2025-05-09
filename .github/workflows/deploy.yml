@@ -22,18 +22,20 @@ jobs:
           python-version: 3
           cache: pip
           check-latest: true
+      - name: Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          use-cache: 'true'
       - name: Run ansible
         env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-          DEPLOY_USERNAME: ${{ secrets.DEPLOY_USERNAME }}
-          ANSIBLE_INVENTORY: inventories/github.yaml
+          ANSIBLE_INVENTORY: inventories/tailscale.yaml
           ANSIBLE_VAULT_PASSWORD_FILE: vault.pass
           ANSIBLE_FORCE_COLOR: "true"
           ANSIBLE_ROLES_PATH: "./roles"
         run: |
           echo '${{ secrets.ANSIBLE_VAULT_PASSWORD }}' > $ANSIBLE_VAULT_PASSWORD_FILE
           ls $ANSIBLE_VAULT_PASSWORD_FILE
-          export KEY_FILE=$(mktemp)
-          echo "${{ secrets.DEPLOY_KEY }}" > $KEY_FILE
           ansible-playbook playbooks/all.yaml
