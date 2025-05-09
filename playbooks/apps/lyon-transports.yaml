@@ -1,8 +1,12 @@
 ---
 - name: Lyon-transports
-  hosts: servers
-  gather_facts: false
+  hosts: common
   tasks:
+    - name: Ensure dir exists
+      ansible.builtin.file:
+        path: "{{ dir }}"
+        state: directory
+        mode: "0755"
     - name: Write service file
       become: true
       ansible.builtin.template:

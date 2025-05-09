@@ -1,7 +1,6 @@
 ---
 - name: Goatcounter
-  hosts: servers
-  gather_facts: false
+  hosts: common
   tasks:
     - name: Get latest release
       community.general.github_release:
@@ -12,6 +11,11 @@
     - name: Print release
       ansible.builtin.debug:
         var: release.tag
+    - name: Ensure dir exists
+      ansible.builtin.file:
+        path: "{{ dir }}"
+        state: directory
+        mode: "0755"
     - name: Download binary
       ansible.builtin.get_url:
         url: https://github.com/arp242/goatcounter/releases/download/{{ release.tag }}/goatcounter-{{ release.tag }}-linux-amd64.gz

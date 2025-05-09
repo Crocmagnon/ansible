@@ -1,7 +1,6 @@
 ---
 - name: Watchtower
-  hosts: servers
-  gather_facts: false
+  hosts: common
   tasks:
     - name: Docker
       ansible.builtin.include_role:

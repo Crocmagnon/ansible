@@ -6,8 +6,8 @@ After=network.target
 ExecStart={{ dir }}/lyon-transports-linux-amd64 --host 127.0.0.1 --port 8013 -u {{ lyon_transports_username }} -p {{ lyon_transports_password }} --cors-allowed-origin https://display.augendre.info
 Type=simple
 Restart=always
-User=gaugendre
-Group=gaugendre
+User={{ ansible_user_id }}
+Group={{ ansible_user_id }}
 
 [Install]
 WantedBy=default.target

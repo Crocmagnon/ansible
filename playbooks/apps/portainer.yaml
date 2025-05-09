@@ -1,6 +1,6 @@
 ---
 - name: Portainer
-  hosts: servers
+  hosts: common
   gather_facts: false
   tasks:
     - name: Docker

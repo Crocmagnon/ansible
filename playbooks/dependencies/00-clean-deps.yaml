@@ -1,6 +1,6 @@
 ---
 - name: Clean ansible venv
-  hosts: servers
+  hosts: common
   gather_facts: false
   tasks:
     - name: Remove virtualenv

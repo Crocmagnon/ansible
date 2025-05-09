@@ -1,6 +1,6 @@
 ---
 - name: Visual Studio Code
-  hosts: servers
+  hosts: common
   gather_facts: false
   tasks:
     - name: Docker
