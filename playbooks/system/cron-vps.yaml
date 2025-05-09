@@ -1,6 +1,6 @@
 ---
 - name: Setup crontab
-  hosts: servers
+  hosts: vps
   gather_facts: false
   tasks:
     - name: Cron - Docker system prune
@@ -25,21 +25,6 @@
         name: Dump miniflux
         minute: 50
         job: "{{ deploy_dir }}/bin/healthcheck dump-miniflux {{ deploy_dir }}/bin/dump-miniflux"
-    - name: Cron - Dump voyages.coccomagnard.fr
-      ansible.builtin.cron:
-        name: Dump voyages.coccomagnard.fr
-        minute: 55
-        job: "{{ deploy_dir }}/bin/healthcheck dump-voyages-coccomagnard-fr {{ deploy_dir }}/bin/dump-voyages.coccomagnard.fr"
-    - name: Cron - Dump gabnotes.org
-      ansible.builtin.cron:
-        name: Dump gabnotes.org
-        minute: 56
-        job: "{{ deploy_dir }}/bin/healthcheck dump-gabnotes-org {{ deploy_dir }}/bin/dump-gabnotes.org"
-    - name: Cron - Dump voyages-lois.augendre.info
-      ansible.builtin.cron:
-        name: Dump voyages-lois.augendre.info
-        minute: 57
-        job: "{{ deploy_dir }}/bin/healthcheck dump-voyages-lois-augendre-info {{ deploy_dir }}/bin/dump-voyages-lois.augendre.info"
     - name: Cron - Download Freebox invoice
       ansible.builtin.cron:
         name: Download Freebox invoice
@@ -76,15 +61,3 @@
         hour: 13
         day: 10
         job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-lcl-checking"
-    - name: Cron - Restart plex container for auto version check
-      ansible.builtin.cron:
-        name: Restart plex container for auto version check
-        minute: 0
-        hour: 8
-        job: /usr/bin/docker compose -f {{ deploy_dir }}/media/docker-compose.yaml restart plex
-    - name: Cron - Sync pCloud
-      ansible.builtin.cron:
-        name: Sync pCloud
-        minute: 0
-        hour: 4
-        job: "{{ deploy_dir }}/bin/healthcheck sync-pcloud {{ deploy_dir }}/bin/sync-pcloud"

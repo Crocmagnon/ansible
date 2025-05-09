@@ -1,3 +1,4 @@
 #!/bin/bash
 set -euo pipefail
+mkdir -p {{ deploy_dir }}/manuels/db_export
 pg_dump -h ag56382-001.eu.clouddb.ovh.net -p 35458 -U manuels -Fc manuels > {{ deploy_dir }}/manuels/db_export/backup.dump
