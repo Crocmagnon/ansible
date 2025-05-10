@@ -21,7 +21,7 @@
       community.general.ufw:
         rule: allow
         direction: in
-        port: tailscale0
+        interface: tailscale0
     - name: Enable UFW with deny default
       community.general.ufw:
         state: enabled
