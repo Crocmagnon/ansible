@@ -1,3 +1,4 @@
 #!/bin/bash
 set -euo pipefail
+mkdir -p {{ deploy_dir }}/voyages-lois.augendre.info/db_export
 /usr/bin/mysqldump --host ag56382-002.eu.clouddb.ovh.net --port 35617 --no-tablespaces -u backup --password={{ ghost_db_password }} voyages_lois_augendre_info > {{ deploy_dir }}/voyages-lois.augendre.info/db_export/backup.sql
