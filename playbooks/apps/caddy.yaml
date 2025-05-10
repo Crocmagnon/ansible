@@ -11,6 +11,12 @@
         mode: "0755"
         owner: root
         group: root
+    - name: Create caddy deploy dir
+      become: false
+      ansible.builtin.file:
+        path: "{{ deploy_dir }}/caddy"
+        state: directory
+        mode: "0775"
     - name: Write Caddyfile
       ansible.builtin.template:
         src: files/caddy/Caddyfile.j2

@@ -21,7 +21,7 @@
 }
 
 (internal) {
-	@blocked not client_ip private_ranges 2a01:e0a:325:a1c0::/64
+	@blocked not client_ip private_ranges 2a01:e0a:325:a1c0::/64 fd7a:115c:a1e0::/48 100.0.0.0/8
 	respond @blocked "Access denied" 403 {
 		close
 	}
@@ -176,20 +176,6 @@ autoconfig.augendre.info {
 # INTERNAL SERVICES
 #########################################################
 
-## Static config
-#########################################################
-
-internal-static.augendre.info {
-	import common_headers
-	import internal
-	header * Cache-Control "max-age=300"
-	file_server * {
-		root {{ deploy_dir }}/caddy/internal-static
-		hide .*
-		browse
-	}
-}
-
 ## Reverse proxies (ports 9000-9999)
 #########################################################
 
@@ -201,6 +187,16 @@ portainer.augendre.info {
 			tls_insecure_skip_verify
 		}
 	}
+}
+
+portainer-vps-1.augendre.info {
+    import common_headers
+    import internal
+    reverse_proxy https://localhost:9001 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
 }
 
 code.augendre.info {
@@ -243,7 +239,7 @@ test.augendre.info {
 
 # ports 9009-9011 are available
 
-stirlingpdf.augendre.info {
+pdf.augendre.info {
 	import common_headers
 	import internal
 	reverse_proxy localhost:9012
