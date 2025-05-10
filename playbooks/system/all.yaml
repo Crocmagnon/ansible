@@ -4,3 +4,4 @@
 - import_playbook: cron-vps.yaml # noqa: name[play]
 - import_playbook: cron-root-home.yaml # noqa: name[play]
 - import_playbook: cron-root-vps.yaml # noqa: name[play]
+- import_playbook: ufw.yaml # noqa: name[play]

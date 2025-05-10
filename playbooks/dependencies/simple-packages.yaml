@@ -9,3 +9,4 @@
           - fish
           - unzip
           - zip
+          - mysql-client # required for mysqldump
