@@ -36,6 +36,7 @@ services:
     restart: unless-stopped
     volumes:
       - redisdata:/data
+    cpus: 0.5
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -59,6 +60,7 @@ services:
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    cpus: 0.5
 
   gotenberg:
     image: docker.io/gotenberg/gotenberg:8.7
@@ -72,10 +74,12 @@ services:
       - "gotenberg"
       - "--chromium-disable-javascript=true"
       - "--chromium-allow-list=file:///tmp/.*"
+    cpus: 0.5
 
   tika:
     image: docker.io/apache/tika:latest
     restart: unless-stopped
+    cpus: 0.5
 
   ftp:
     restart: unless-stopped
@@ -88,7 +92,7 @@ services:
 #      - '40000-40009:40000-40009/tcp' # Only needed for passive mode
     volumes:
       - './consume:/home/ftpuser'
+    cpus: 0.5
 
 volumes:
-  pgdata:
   redisdata:
