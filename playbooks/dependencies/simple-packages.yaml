@@ -10,3 +10,4 @@
           - unzip
           - zip
           - mysql-client # required for mysqldump
+          - sqlite3
