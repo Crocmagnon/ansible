@@ -6,7 +6,6 @@ services:
     healthcheck:
       test: ["CMD", "/usr/bin/miniflux", "-healthcheck", "auto"]
     mem_limit: 512m
+    cpus: 0.5
     ports:
       - "127.0.0.1:8008:3298"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"

@@ -9,7 +9,6 @@ services:
     init: true
     tty: true
     mem_limit: 512m
+    cpus: 0.5
     ports:
       - "127.0.0.1:8012:8000"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"

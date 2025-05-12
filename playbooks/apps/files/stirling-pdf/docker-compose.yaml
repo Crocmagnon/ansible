@@ -11,3 +11,5 @@ services:
       - SECURITY_ENABLE_LOGIN=true
       - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
       - LANGS=en_GB,fr_FR,en_US
+    mem_limit: 800m
+    cpus: 0.5

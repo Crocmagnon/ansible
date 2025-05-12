@@ -7,3 +7,5 @@ services:
       - ./code_data:/config
     ports:
       - "127.0.0.1:9002:8443"
+    mem_limit: 512m
+    cpus: 0.5

@@ -8,3 +8,5 @@ services:
       - ./wallabag_data/images:/var/www/wallabag/web/assets/images
     ports:
       - "127.0.0.1:8009:80"
+    cpus: 0.5
+    mem_limit: 512m

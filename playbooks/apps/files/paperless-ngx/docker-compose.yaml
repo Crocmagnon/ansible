@@ -37,6 +37,7 @@ services:
     volumes:
       - redisdata:/data
     cpus: 0.5
+    mem_limit: 100m
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -58,9 +59,8 @@ services:
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     cpus: 0.5
+    mem_limit: 1536m
 
   gotenberg:
     image: docker.io/gotenberg/gotenberg:8.7
@@ -75,11 +75,13 @@ services:
       - "--chromium-disable-javascript=true"
       - "--chromium-allow-list=file:///tmp/.*"
     cpus: 0.5
+    mem_limit: 100m
 
   tika:
     image: docker.io/apache/tika:latest
     restart: unless-stopped
     cpus: 0.5
+    mem_limit: 512m
 
   ftp:
     restart: unless-stopped
@@ -93,6 +95,7 @@ services:
     volumes:
       - './consume:/home/ftpuser'
     cpus: 0.5
+    mem_limit: 128m
 
 volumes:
   redisdata:

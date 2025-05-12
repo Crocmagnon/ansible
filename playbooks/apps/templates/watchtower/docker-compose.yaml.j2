@@ -6,3 +6,5 @@ services:
       - {{ ansible_env.HOME }}/.docker/config.json:/config.json
       - /etc/localtime:/etc/localtime:ro
     command: --interval 86400 --cleanup --include-restarting
+    mem_limit: 512m
+    cpus: 0.5

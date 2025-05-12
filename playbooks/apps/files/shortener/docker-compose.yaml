@@ -6,6 +6,7 @@ services:
     volumes:
       - ./shortener_data:/db
     mem_limit: 300m
+    cpus: 0.5
     tty: true
     init: true
     ports:
