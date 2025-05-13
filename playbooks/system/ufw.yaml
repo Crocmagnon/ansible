@@ -22,6 +22,21 @@
         rule: allow
         direction: in
         interface: tailscale0
+    - name: Allow from OVH known IPs EU 1
+      community.general.ufw:
+        rule: allow
+        from_ip: 109.190.254.0/26
+        port: ssh
+    - name: Allow from OVH known IPs EU 2
+      community.general.ufw:
+        rule: allow
+        from_ip: 109.190.255.0/25
+        port: ssh
+    - name: Allow from home known IP
+      community.general.ufw:
+        rule: allow
+        from_ip: 82.65.167.55/32
+        port: ssh
     - name: Enable UFW with deny default
       community.general.ufw:
         state: enabled
