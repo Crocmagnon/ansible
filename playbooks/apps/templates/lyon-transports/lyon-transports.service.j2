@@ -8,6 +8,9 @@ Type=simple
 Restart=always
 User={{ ansible_user_id }}
 Group={{ ansible_user_id }}
+CPUQuota=50%
+MemoryHigh=20M
+MemoryMax=50M
 
 [Install]
 WantedBy=default.target
