@@ -25,6 +25,9 @@
 	respond @blocked "Access denied" 403 {
 		close
 	}
+    tls {
+        resolvers 1.1.1.1 1.0.0.1
+    }
 }
 
 #########################################################
@@ -108,16 +111,6 @@ manuels.augendre.info, fournitures.augendre.info {
 	reverse_proxy localhost:8012
 }
 
-tcl.augendre.info {
-	import common_headers
-	reverse_proxy localhost:8013
-}
-
-paperless.augendre.info {
-	import common_headers
-	reverse_proxy localhost:8014
-}
-
 ## Ghost blogs (ports >=2368)
 #########################################################
 
@@ -179,7 +172,7 @@ autoconfig.augendre.info {
 ## Reverse proxies (ports 9000-9999)
 #########################################################
 
-portainer.augendre.info {
+portainer.augendre.info portainer-vps-1.augendre.info {
 	import common_headers
 	import internal
 	reverse_proxy https://localhost:9001 {
@@ -187,16 +180,6 @@ portainer.augendre.info {
 			tls_insecure_skip_verify
 		}
 	}
-}
-
-portainer-vps-1.augendre.info {
-    import common_headers
-    import internal
-    reverse_proxy https://localhost:9001 {
-        transport http {
-            tls_insecure_skip_verify
-        }
-    }
 }
 
 code.augendre.info {
@@ -237,19 +220,23 @@ test.augendre.info {
 	reverse_proxy localhost:9008
 }
 
-# ports 9009-9011 are available
+paperless.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:9009
+}
+
+tcl.augendre.info {
+	import common_headers
+	reverse_proxy localhost:9010
+}
+
+# port 9011 is available
 
 pdf.augendre.info {
 	import common_headers
 	import internal
 	reverse_proxy localhost:9012
-}
-
-# ESP Home builder is in network mode host.
-esphome.augendre.info {
-	import common_headers
-	import internal
-	reverse_proxy localhost:6052
 }
 
 #########################################################
@@ -278,4 +265,9 @@ blog.augendre.info gabriel.augendre.info www.gabnotes.org {
 qrcode.augendre.info qr.augendre.info {
 	import common_headers
 	redir https://static.augendre.info/qrcode-web/
+}
+
+coccomagnard.fr {
+    import common_headers
+    redir https://voyages.coccomagnard.fr
 }
