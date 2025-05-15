@@ -146,12 +146,6 @@ voyages.coccomagnard.fr, voyages.augendre.info {
 ## At home
 #########################################################
 
-hass.augendre.info {
-	import common_headers
-	header * X-Frame-Options "SAMEORIGIN"
-	reverse_proxy http://192.168.0.9:8123
-}
-
 prusalink.augendre.info {
 	import internal
 	reverse_proxy http://192.168.0.12
