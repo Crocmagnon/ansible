@@ -83,19 +83,5 @@ services:
     cpus: 0.5
     mem_limit: 512m
 
-  ftp:
-    restart: unless-stopped
-    env_file: ftp.env
-    image: garethflowers/ftp-server
-    init: true
-    tty: true
-    ports:
-      - '7020-7021:20-21/tcp'
-#      - '40000-40009:40000-40009/tcp' # Only needed for passive mode
-    volumes:
-      - './consume:/home/ftpuser'
-    cpus: 0.5
-    mem_limit: 128m
-
 volumes:
   redisdata:

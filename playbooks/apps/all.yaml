@@ -4,6 +4,7 @@
 - import_playbook: caddy-vps.yaml # noqa: name[play]
 - import_playbook: charasheet.yaml # noqa: name[play]
 - import_playbook: code.yaml # noqa: name[play]
+- import_playbook: ftp.yaml # noqa: name[play]
 - import_playbook: ghost.yaml # noqa: name[play]
 - import_playbook: git.yaml # noqa: name[play]
 - import_playbook: goatcounter.yaml # noqa: name[play]

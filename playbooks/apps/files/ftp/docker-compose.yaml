@@ -1,0 +1,13 @@
+services:
+  ftp:
+    restart: unless-stopped
+    env_file: ftp.env
+    image: garethflowers/ftp-server
+    init: true
+    tty: true
+    ports:
+      - '7020-7021:20-21/tcp'
+    volumes:
+      - './consume:/home/ftpuser'
+    cpus: 0.5
+    mem_limit: 128m
