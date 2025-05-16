@@ -1,6 +1,6 @@
 ---
 - name: Lyon-transports
-  hosts: common
+  hosts: vps
   tasks:
     - name: Ensure dir exists
       ansible.builtin.file:

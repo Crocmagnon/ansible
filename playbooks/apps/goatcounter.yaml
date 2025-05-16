@@ -1,6 +1,6 @@
 ---
 - name: Goatcounter
-  hosts: common
+  hosts: vps
   tasks:
     - name: Get latest release
       community.general.github_release:

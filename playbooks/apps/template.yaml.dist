@@ -1,6 +1,6 @@
 ---
 - name: ==APP==
-  hosts: servers
+  hosts: vps
   gather_facts: false
   tasks:
     - name: Docker

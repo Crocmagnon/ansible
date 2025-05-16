@@ -1,6 +1,6 @@
 ---
 - name: Manuels
-  hosts: common
+  hosts: vps
   tasks:
     - name: Docker
       ansible.builtin.include_role:

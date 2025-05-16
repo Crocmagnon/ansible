@@ -1,6 +1,6 @@
 ---
 - name: Stirling-pdf
-  hosts: common
+  hosts: vps
   gather_facts: false
   tasks:
     - name: Docker

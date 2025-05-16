@@ -1,6 +1,6 @@
 ---
 - name: Update caddy config
-  hosts: servers
+  hosts: home
   gather_facts: false
   become: true
   tasks:

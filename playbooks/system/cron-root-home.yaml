@@ -1,6 +1,6 @@
 ---
 - name: Setup root crontab
-  hosts: servers
+  hosts: home
   become: true
   gather_facts: false
   tasks:

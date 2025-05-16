@@ -1,6 +1,6 @@
 ---
 - name: Setup crontab
-  hosts: servers
+  hosts: home
   gather_facts: false
   tasks:
     - name: Cron - Docker system prune

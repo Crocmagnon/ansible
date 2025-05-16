@@ -1,6 +1,6 @@
 ---
 - name: Media
-  hosts: servers
+  hosts: home
   gather_facts: false
   tasks:
     - name: Docker

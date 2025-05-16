@@ -1,6 +1,6 @@
 ---
 - name: Ghost config
-  hosts: common
+  hosts: vps
   gather_facts: false
   tasks:
     - name: Update ghost-cli
