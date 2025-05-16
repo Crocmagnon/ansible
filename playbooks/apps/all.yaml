@@ -1,6 +1,7 @@
 ---
 - import_playbook: bin.yaml # noqa: name[play]
-- import_playbook: caddy.yaml # noqa: name[play]
+- import_playbook: caddy-home.yaml # noqa: name[play]
+- import_playbook: caddy-vps.yaml # noqa: name[play]
 - import_playbook: charasheet.yaml # noqa: name[play]
 - import_playbook: code.yaml # noqa: name[play]
 - import_playbook: ghost.yaml # noqa: name[play]

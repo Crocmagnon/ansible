@@ -1,6 +1,6 @@
 ---
 - name: Update caddy config
-  hosts: common
+  hosts: vps
   gather_facts: false
   become: true
   tasks:
@@ -19,7 +19,7 @@
         mode: "0775"
     - name: Write Caddyfile
       ansible.builtin.template:
-        src: files/caddy/Caddyfile.j2
+        src: files/caddy/Caddyfile-vps.j2
         dest: /etc/caddy/Caddyfile
         mode: "0644"
         owner: root
