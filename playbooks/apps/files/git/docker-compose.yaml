@@ -1,4 +1,18 @@
 services:
+  anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    environment:
+      BIND: ":8080"
+      DIFFICULTY: "4"
+      METRICS_BIND: ":9090"
+      SERVE_ROBOTS_TXT: "true"
+      TARGET: "http://server:3000"
+      OG_PASSTHROUGH: "true"
+      OG_EXPIRY_TIME: "24h"
+    ports:
+      - "127.0.0.1:8006:8080"
+    mem_limit: 128m
+    cpus: 0.5
   server:
     image: codeberg.org/forgejo/forgejo:10
     env_file: gitea.env
@@ -9,6 +23,5 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "23730:22" # needs to be open to the router
-      - "127.0.0.1:8006:3000"
     mem_limit: 512m
     cpus: 0.1
