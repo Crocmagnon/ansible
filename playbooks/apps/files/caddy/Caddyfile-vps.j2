@@ -118,7 +118,7 @@ manuels.augendre.info, fournitures.augendre.info {
 
 gabnotes.org {
 	import common_headers
-	header * Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://*.gabnotes.org https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' https:; connect-src 'self' https://*.augendre.info https://unpkg.com https://*.gabnotes.org https://api.codapi.org; frame-ancestors https://*.augendre.info; base-uri 'self'; form-action 'self';"
+	header * Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://*.gabnotes.org https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' https:; connect-src 'self' https://*.augendre.info https://unpkg.com https://*.gabnotes.org https://api.codapi.org; frame-src https://*.youtube.com 'self'; frame-ancestors https://*.augendre.info; base-uri 'self'; form-action 'self';"
 
 	reverse_proxy localhost:2368
 }
