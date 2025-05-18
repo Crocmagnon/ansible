@@ -44,7 +44,7 @@ template = "bootstrap"
 ;info = "More information on the <a href='https://privatebin.info/'>project page</a>."
 
 ; (optional) notice to display
-; notice = "Note: This is a test service: Data may be deleted anytime. Kittens will die if you abuse this service."
+notice = "Note: This is a test service. Data may be deleted anytime."
 
 ; by default PrivateBin will guess the visitors language based on the browsers
 ; settings. Optionally you can enable the language selection menu, which uses
@@ -109,7 +109,7 @@ languageselection = false
 [expire]
 ; expire value that is selected per default
 ; make sure the value exists in [expire_options]
-default = "1week"
+default = "1hour"
 
 [expire_options]
 ; Set each one of these to the number of seconds in the expiration period,
@@ -118,9 +118,6 @@ default = "1week"
 10min = 600
 1hour = 3600
 1day = 86400
-1week = 604800
-; Well this is not *exactly* one month, it's 30 days:
-1month = 2592000
 
 [formatter_options]
 ; Set available formatters, their order and their labels
