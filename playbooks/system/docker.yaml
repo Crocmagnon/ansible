@@ -1,0 +1,21 @@
+---
+- name: Setup docker
+  hosts: vps
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Write daemon.json
+      ansible.builtin.copy:
+        src: files/docker/daemon.json
+        dest: /etc/docker/daemon.json
+        mode: "0644"
+        owner: root
+        group: root
+      notify:
+        - Restart docker
+  handlers:
+    - name: Restart docker
+      ansible.builtin.service:
+        name: docker
+        state: restarted
+        enabled: true
