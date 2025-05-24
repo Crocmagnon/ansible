@@ -1,0 +1,26 @@
+rewrite ovh-token {
+    set("{{ ovh_token }}", value(".SDATA.token@29084.X-OVH-TOKEN"));
+};
+
+destination ovhPaaSLogs {
+    network("gra3.logs.ovh.com"
+        port(6514)
+        transport("tls")
+        flags(syslog-protocol)
+        ts_format("iso")
+        frac-digits(6)
+        tls(peer-verify("required-trusted") ca_dir("/etc/ssl/certs/"))
+        keep-alive(yes)
+        so_keepalive(yes)
+    );
+};
+
+## you can use this destination for debugging purpose
+#destination debugfile {
+#    file("/var/log/debugpaaslogs.log"
+#      flags(syslog-protocol)
+#    );
+#};
+
+log { source(s_src); rewrite(ovh-token); destination(ovhPaaSLogs); };
+#log { source(s_src); rewrite(ovh-token); destination(debugfile); };

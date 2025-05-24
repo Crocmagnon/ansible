@@ -1,0 +1,43 @@
+---
+- name: Setup syslog
+  hosts: vps
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install syslog-ng
+      ansible.builtin.apt:
+        pkg:
+          - syslog-ng
+    - name: Write main config file
+      ansible.builtin.copy:
+        src: files/syslog/syslog-ng.conf
+        dest: /etc/syslog-ng/syslog-ng.conf
+        mode: "0644"
+        owner: root
+        group: root
+      notify:
+        - Reload syslog
+    - name: Write lpd config file
+      ansible.builtin.template:
+        src: files/syslog/ldp.conf.j2
+        dest: /etc/syslog-ng/conf.d/ldp.conf
+        mode: "0644"
+        owner: root
+        group: root
+      notify:
+        - Reload syslog
+  handlers:
+    - name: Reload syslog
+      ansible.builtin.service:
+        name: syslog-ng
+        state: restarted
+        enabled: true
+  vars:
+    ovh_token: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      65333639656436636366356234346431613636303339663136386131623333653333653035396236
+      3436633732613834393364303330626335643363366463390a663937653664633861343631616430
+      61313737326137313938356663333262633532316266326332303261306330346566353462373831
+      3833623738393162610a326664663839326534353163343665343137306438646464626332386231
+      35353430643363623631376536306537643461643435376564353364396566393434343034633561
+      3536333761613064636335383930306634386134333764643466
