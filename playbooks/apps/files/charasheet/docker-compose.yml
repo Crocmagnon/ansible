@@ -12,5 +12,5 @@ services:
     restart: always
     init: true
     tty: true
-    mem_limit: 512m
+    mem_limit: 256m
     cpus: 0.5

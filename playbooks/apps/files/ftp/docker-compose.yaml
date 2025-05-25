@@ -1,6 +1,6 @@
 services:
   ftp:
-    restart: unless-stopped
+    restart: always
     env_file: ftp.env
     image: garethflowers/ftp-server
     init: true

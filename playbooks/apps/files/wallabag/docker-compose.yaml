@@ -9,7 +9,7 @@ services:
     ports:
       - "127.0.0.1:8009:80"
     cpus: 0.5
-    mem_limit: 512m
+    mem_limit: 256m
     # Migrate DB if needed after update
     labels:
       com.centurylinklabs.watchtower.lifecycle.post-update: "/var/www/wallabag/bin/console doctrine:migrations:migrate --env=prod --no-interaction"

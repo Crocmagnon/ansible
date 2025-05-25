@@ -1,4 +1,5 @@
 ---
+# Disabled in all
 - name: Manuels
   hosts: vps
   tasks:

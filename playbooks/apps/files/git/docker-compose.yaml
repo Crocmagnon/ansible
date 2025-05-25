@@ -10,7 +10,7 @@ services:
       OG_PASSTHROUGH: "false"
     ports:
       - "127.0.0.1:8006:8080"
-    mem_limit: 128m
+    mem_limit: 64m
     restart: always
     cpus: 0.5
   server:
@@ -23,5 +23,5 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "23730:22" # needs to be open to the router
-    mem_limit: 512m
+    mem_limit: 256m
     cpus: 0.1

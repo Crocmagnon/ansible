@@ -5,6 +5,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - {{ ansible_env.HOME }}/.docker/config.json:/config.json
       - /etc/localtime:/etc/localtime:ro
-    command: --interval 86400 --cleanup --include-restarting --enable-lifecycle-hooks
-    mem_limit: 512m
+    command: --schedule "0 0 4 * * *" --cleanup --include-restarting --enable-lifecycle-hooks --rolling-restart
+    mem_limit: 64m
     cpus: 0.5

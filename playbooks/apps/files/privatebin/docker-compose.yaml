@@ -7,6 +7,6 @@ services:
       - ./data:/srv/data
       - ./conf.php:/srv/cfg/conf.php:ro
     cpus: 0.5
-    mem_limit: 150m
+    mem_limit: 64m
     ports:
       - "127.0.0.1:8010:8080"

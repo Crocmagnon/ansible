@@ -5,7 +5,7 @@ services:
     restart: always
     volumes:
       - ./shortener_data:/db
-    mem_limit: 300m
+    mem_limit: 128m
     cpus: 0.5
     tty: true
     init: true
