@@ -15,6 +15,7 @@
       vars:
         ghost_filename: gabnotes-org-config.json.j2
         ghost_site: gabnotes.org
+        ghost_systemctl_service: ghost_gabnotes-org.service
         ghost_db_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           62303136643236393439626134643435646338343530303731323739623562323137343633653235
@@ -37,6 +38,7 @@
       vars:
         ghost_filename: voyages-coccomagnard-fr-config.json.j2
         ghost_site: voyages.coccomagnard.fr
+        ghost_systemctl_service: ghost_voyages-coccomagnard-fr.service
         ghost_db_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           38373432323938316364663239343232616236373361333162633738343937313261313338366531
@@ -59,6 +61,7 @@
       vars:
         ghost_filename: voyages-lois-augendre-info-config.json.j2
         ghost_site: voyages-lois.augendre.info
+        ghost_systemctl_service: ghost_voyages-lois-augendre-info.service
         ghost_db_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           62353834396534383164313434653935313835623163303334356532336561643732643564366461

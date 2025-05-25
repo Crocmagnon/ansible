@@ -6,6 +6,13 @@
     mode: "0664"
   notify:
     - Restart service {{ ghost_site }}
+- name: Write systemctl override for {{ ghost_site }}
+  ansible.builtin.copy:
+    src: files/ghost/override.conf
+    dest: /etc/systemd/system/{{ ghost_systemctl_service }}.d/override.conf
+    mode: "0644"
+  notify:
+    - Restart service {{ ghost_site }}
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 - name: Ensure service is started {{ ghost_site }}
