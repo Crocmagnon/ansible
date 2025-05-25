@@ -18,5 +18,6 @@
 - import_playbook: shortener.yaml # noqa: name[play]
 - import_playbook: stirling-pdf.yaml # noqa: name[play]
 - import_playbook: test_headers.yaml # noqa: name[play]
+- import_playbook: vps-control.yaml # noqa: name[play]
 - import_playbook: wallabag.yaml # noqa: name[play]
 - import_playbook: watchtower.yaml # noqa: name[play]

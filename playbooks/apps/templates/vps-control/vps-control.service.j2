@@ -1,0 +1,22 @@
+[Unit]
+Description=VPS control UI
+After=network.target
+
+[Service]
+ExecStart={{ dir }}/vps-control-linux-amd64
+Type=simple
+Restart=always
+User={{ ansible_user_id }}
+Group={{ ansible_user_id }}
+CPUQuota=50%
+MemoryHigh=20M
+MemoryMax=50M
+
+Environment="OVH_ENDPOINT=ovh-eu"
+Environment="OVH_APPLICATION_KEY={{ vps_control_ovh_app_key }}"
+Environment="OVH_APPLICATION_SECRET={{ vps_control_ovh_app_secret }}"
+Environment="OVH_CONSUMER_KEY={{ vps_control_ovh_consumer_key }}"
+Environment="LISTEN_ADDR=127.0.0.1:9002"
+
+[Install]
+WantedBy=default.target

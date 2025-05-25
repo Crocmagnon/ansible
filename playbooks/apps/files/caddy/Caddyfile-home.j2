@@ -59,6 +59,12 @@ portainer.augendre.info {
 	}
 }
 
+vps-control.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy http://localhost:9002
+}
+
 plex.augendre.info {
 	import common_headers
 	import internal
