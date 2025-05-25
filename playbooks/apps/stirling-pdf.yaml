@@ -1,4 +1,5 @@
 ---
+# currently disabled in all
 - name: Stirling-pdf
   hosts: vps
   gather_facts: false
