@@ -14,6 +14,7 @@
       ansible.builtin.cron:
         name: Dump manuels
         minute: 45
+        disabled: true
         job: "{{ deploy_dir }}/bin/healthcheck dump-manuels {{ deploy_dir }}/bin/dump-manuels"
     - name: Cron - Dump paperless
       ansible.builtin.cron:
