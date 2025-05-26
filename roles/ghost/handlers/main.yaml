@@ -1,4 +1,8 @@
 ---
+- name: Reload daemon
+  ansible.builtin.service:
+    daemon_reload: true
+  become: true
 - name: Restart service {{ ghost_site }}
   ansible.builtin.command:
     cmd: ghost restart
