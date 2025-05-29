@@ -120,12 +120,18 @@ gabnotes.org {
 	import common_headers
 	header * Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://*.gabnotes.org https://unpkg.com https://cloud.umami.is https://cdnjs.cloudflare.com; img-src 'self' https:; connect-src 'self' https://*.augendre.info https://unpkg.com https://*.gabnotes.org https://api.codapi.org https://*.umami.dev; frame-src https://*.youtube.com 'self'; frame-ancestors https://*.augendre.info; base-uri 'self'; form-action 'self';"
 
-	route {
-		file_server /content/images/* {
-			root {{ deploy_dir }}/gabnotes.org
-		}
-		reverse_proxy localhost:2368
-	}
+    root {{ deploy_dir }}/gabnotes.org
+
+    try_files {path} {path}/ @backend
+    file_server
+
+    @backend {
+        not file
+    }
+
+    handle @backend {
+        reverse_proxy localhost:2368
+    }
 }
 ghost.augendre.info {
 	import common_headers
@@ -137,23 +143,37 @@ ghost.augendre.info {
 voyages-lois.augendre.info {
 	import common_headers
 	header * X-Frame-Options "SAMEORIGIN"
-	route {
-		file_server /content/images/* {
-			root {{ deploy_dir }}/voyages-lois.augendre.info
-		}
-		reverse_proxy localhost:2369
-	}
+
+    root {{ deploy_dir }}/voyages-lois.augendre.info
+
+    try_files {path} {path}/ @backend
+    file_server
+
+    @backend {
+        not file
+    }
+
+    handle @backend {
+        reverse_proxy localhost:2369
+    }
 }
 
 voyages.coccomagnard.fr, voyages.augendre.info {
 	import common_headers
 	header * X-Frame-Options "SAMEORIGIN"
-	route {
-		file_server /content/images/* {
-			root {{ deploy_dir }}/voyages.coccomagnard.fr
-		}
-		reverse_proxy localhost:2370
-	}
+
+    root {{ deploy_dir }}/voyages.coccomagnard.fr
+
+    try_files {path} {path}/ @backend
+    file_server
+
+    @backend {
+        not file
+    }
+
+    handle @backend {
+        reverse_proxy localhost:2370
+    }
 }
 
 #########################################################
