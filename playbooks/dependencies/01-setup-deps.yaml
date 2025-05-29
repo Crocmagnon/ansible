@@ -8,7 +8,7 @@
         pkg:
           - python3-venv
     - name: Setup venv
-      # github3.py required by the goatcounter playbook
+      # github3.py required by some playbooks
       ansible.builtin.shell: |
         if [ -x /tmp/ansible/bin/python ] && [ -x /tmp/ansible/bin/pip ] ; then exit 123; fi
         rm -rf /tmp/ansible
