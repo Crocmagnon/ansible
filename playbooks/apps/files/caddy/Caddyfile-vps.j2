@@ -164,30 +164,6 @@ voyages-lois.augendre.info {
     }
 }
 
-voyages.coccomagnard.fr, voyages.augendre.info {
-	import common_headers
-	header * X-Frame-Options "SAMEORIGIN"
-
-    root {{ deploy_dir }}/voyages.coccomagnard.fr
-
-    handle /content/images/* {
-        try_files {path} {path}/ @backend
-        file_server
-
-        @backend {
-            not file
-        }
-
-        handle @backend {
-            reverse_proxy localhost:2370
-        }
-    }
-
-    handle {
-        reverse_proxy localhost:2370
-    }
-}
-
 #########################################################
 # PROXY TO EXTERNAL SERVICES
 #########################################################
