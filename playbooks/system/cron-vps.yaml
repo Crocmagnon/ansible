@@ -62,11 +62,6 @@
         hour: 13
         day: 10
         job: "{{ deploy_dir }}/bin/healthcheck downloader {{ deploy_dir }}/bin/download-lcl-checking"
-    - name: Cron - Dump gabnotes.org
-      ansible.builtin.cron:
-        name: Dump gabnotes.org
-        minute: 56
-        job: "{{ deploy_dir }}/bin/healthcheck dump-gabnotes-org {{ deploy_dir }}/bin/dump-gabnotes.org"
     - name: Cron - Dump voyages-lois.augendre.info
       ansible.builtin.cron:
         name: Dump voyages-lois.augendre.info

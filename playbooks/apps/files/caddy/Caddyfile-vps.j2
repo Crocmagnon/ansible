@@ -111,35 +111,6 @@ manuels.augendre.info, fournitures.augendre.info {
 ## Ghost blogs (ports >=2368)
 #########################################################
 
-gabnotes.org {
-	import common_headers
-
-    root {{ deploy_dir }}/gabnotes.org
-
-    handle /content/images/* {
-        try_files {path} {path}/ @backend
-        file_server
-
-        @backend {
-            not file
-        }
-
-        handle @backend {
-            reverse_proxy localhost:2368
-        }
-    }
-
-    handle {
-        reverse_proxy localhost:2368
-    }
-}
-ghost.augendre.info {
-	import common_headers
-	redir / /ghost/
-
-	reverse_proxy localhost:2368
-}
-
 voyages-lois.augendre.info {
 	import common_headers
 	header * X-Frame-Options "SAMEORIGIN"
@@ -240,11 +211,6 @@ mail.augendre.info {
 cv-gabriel.augendre.info {
 	import common_headers
 	redir https://e.pcloud.link/publink/show?code=XZVYidZt0r7H6wbWThqi1xlWOQnCjHKfcrV permanent
-}
-
-blog.augendre.info gabriel.augendre.info www.gabnotes.org {
-	import common_headers
-	redir https://gabnotes.org{uri} permanent
 }
 
 qrcode.augendre.info qr.augendre.info {
