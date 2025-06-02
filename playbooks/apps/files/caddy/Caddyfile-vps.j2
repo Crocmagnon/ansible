@@ -54,14 +54,7 @@ augendre.info {
 ## Reverse proxies (ports 8000-8999)
 #########################################################
 
-# Ports 8002-8005 are available
-
-git.augendre.info {
-	import common_headers
-	reverse_proxy localhost:8006 {
-		header_up X-Real-Ip {remote_host}
-	}
-}
+# Ports 8002-8006 are available
 
 office.augendre.info {
 	import common_headers
@@ -194,4 +187,8 @@ cv-gabriel.augendre.info {
 qrcode.augendre.info qr.augendre.info {
 	import common_headers
 	redir https://static.augendre.info/qrcode-web/
+}
+
+git.augendre.info {
+    redir https://codeberg.org/Crocmagnon
 }
