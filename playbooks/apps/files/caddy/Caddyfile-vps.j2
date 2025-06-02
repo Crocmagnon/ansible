@@ -54,16 +54,6 @@ augendre.info {
 ## Reverse proxies (ports 8000-8999)
 #########################################################
 
-charasheet.augendre.info {
-	import common_headers
-	route {
-		file_server /media/* {
-			root {{ deploy_dir }}/charasheet/data
-		}
-		reverse_proxy localhost:8001
-	}
-}
-
 # Ports 8002-8005 are available
 
 git.augendre.info {
