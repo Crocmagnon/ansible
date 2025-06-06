@@ -6,4 +6,5 @@
 - import_playbook: cron-root-vps.yaml # noqa: name[play]
 - import_playbook: docker.yaml # noqa: name[play]
 - import_playbook: syslog.yaml # noqa: name[play]
-- import_playbook: ufw.yaml # noqa: name[play]
+- import_playbook: ufw-home.yaml # noqa: name[play]
+- import_playbook: ufw-vps.yaml # noqa: name[play]

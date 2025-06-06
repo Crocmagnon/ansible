@@ -1,5 +1,5 @@
 ---
-- name: Firewall config
+- name: Firewall config VPS
   hosts: vps
   gather_facts: false
   become: true
