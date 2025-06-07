@@ -1,6 +1,6 @@
 ---
 - name: Setup syslog
-  hosts: vps
+  hosts: common
   gather_facts: false
   become: true
   tasks:
