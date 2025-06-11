@@ -140,6 +140,12 @@ code.augendre.info {
 	reverse_proxy localhost:9002
 }
 
+budget.augendre.info {
+	import common_headers
+	import internal
+	reverse_proxy localhost:9003
+}
+
 test.augendre.info {
 	import common_headers
 	import internal

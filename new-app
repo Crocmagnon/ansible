@@ -6,7 +6,7 @@ echo "creating directories for '$1'"
 mkdir -p "playbooks/apps/files/$1"
 mkdir -p "playbooks/apps/templates/$1"
 cp playbooks/apps/template.yaml.dist "playbooks/apps/$1.yaml"
-sed -i '' "s/==APP==/$1/g" "playbooks/apps/$1.yaml"
+sed -i "s/==APP==/$1/g" "playbooks/apps/$1.yaml"
 git add .
 pre-commit run
 git add .
