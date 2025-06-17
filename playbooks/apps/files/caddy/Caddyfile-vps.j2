@@ -90,33 +90,6 @@ manuels.augendre.info, fournitures.augendre.info {
 	reverse_proxy localhost:8012
 }
 
-## Ghost blogs (ports >=2368)
-#########################################################
-
-voyages-lois.augendre.info {
-	import common_headers
-	header * X-Frame-Options "SAMEORIGIN"
-
-    root {{ deploy_dir }}/voyages-lois.augendre.info
-
-    handle /content/images/* {
-        try_files {path} {path}/ @backend
-        file_server
-
-        @backend {
-            not file
-        }
-
-        handle @backend {
-            reverse_proxy localhost:2369
-        }
-    }
-
-    handle {
-        reverse_proxy localhost:2369
-    }
-}
-
 #########################################################
 # INTERNAL SERVICES
 #########################################################
@@ -190,4 +163,9 @@ qrcode.augendre.info qr.augendre.info {
 
 git.augendre.info {
     redir https://codeberg.org/Crocmagnon
+}
+
+voyages-lois.augendre.info {
+	import common_headers
+	redir https://voyages-lois.pika.page{uri}
 }
