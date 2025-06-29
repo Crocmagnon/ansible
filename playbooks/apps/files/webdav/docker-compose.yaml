@@ -1,0 +1,8 @@
+services:
+  webdav:
+    image: hacdias/webdav:latest
+    ports:
+      - "127.0.0.1:9003:6065"
+    volumes:
+      - "./data:/data"
+      - "./config.yml:/config.yml:ro"

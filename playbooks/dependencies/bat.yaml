@@ -6,12 +6,7 @@
       become: true
       ansible.builtin.apt:
         pkg:
-          - bat
-    - name: Ensure ~/.local/bin
-      ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.local/bin"
-        state: directory
-        mode: "0755"
+          - bat²
     - name: Link batcat to bat
       ansible.builtin.file:
         src: /usr/bin/batcat
