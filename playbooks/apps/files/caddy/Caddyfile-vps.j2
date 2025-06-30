@@ -119,6 +119,19 @@ webdav.augendre.info {
     reverse_proxy localhost:9003
 }
 
+radicale.augendre.info {
+    import common_headers
+    import internal
+    basic_auth {
+        gaugendre $2a$14$u6DDsfyYYsgm.WZI82ip/.O.vS6DcLewama0cIS4hWhm2.aPFNMq.
+        claire $2a$14$UZKHbnCR9vFOWXqpySSSoeetS8MPyF/Wf3tsJGQDmCP5L.K7z4ZTC
+    }
+
+    reverse_proxy localhost:9004 {
+        header_up X-Remote-User "{http.auth.user.id}"
+    }
+}
+
 test.augendre.info {
 	import common_headers
 	import internal

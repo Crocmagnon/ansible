@@ -1,0 +1,49 @@
+---
+- name: Radicale
+  hosts: vps
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install radicale
+      ansible.builtin.apt:
+        name: radicale
+        state: present
+    - name: Ensure radicale is started
+      ansible.builtin.service:
+        name: radicale
+        state: started
+        enabled: true
+    - name: Fix data dir permissions
+      ansible.builtin.file:
+        path: /var/lib/radicale
+        state: directory
+        owner: radicale
+        group: radicale
+        recurse: true
+        follow: false
+    - name: Write config
+      ansible.builtin.copy:
+        src: files/radicale/config
+        dest: /etc/radicale/config
+        mode: "0644"
+        owner: root
+        group: root
+      notify:
+        - Restart radicale
+    - name: Write rights
+      ansible.builtin.copy:
+        src: files/radicale/rights
+        dest: /etc/radicale/rights
+        mode: "0644"
+        owner: root
+        group: root
+      notify:
+        - Restart radicale
+
+  handlers:
+    - name: Restart radicale
+      ansible.builtin.service:
+        name: radicale
+        state: restarted
+
+  vars: {}
