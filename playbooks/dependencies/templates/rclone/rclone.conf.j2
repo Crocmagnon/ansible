@@ -28,5 +28,16 @@ region = gra
 location_constraint = gra
 endpoint = https://s3.gra.io.cloud.ovh.net/
 
+[ovh-immich]
+type = s3
+provider = Other
+env_auth = false
+access_key_id = {{ rclone_ovh_s3_immich_access_key_id }}
+secret_access_key = {{ rclone_ovh_s3_immich_secret_key }}
+acl = private
+region = gra
+location_constraint = gra
+endpoint = https://s3.gra.io.cloud.ovh.net/
+
 [local]
 type = local
