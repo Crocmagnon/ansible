@@ -3,4 +3,4 @@ set -euo pipefail
 killall restic || true
 source {{ deploy_dir }}/bin/resticenv
 /usr/bin/restic unlock
-/usr/bin/restic backup --exclude-file {{ deploy_dir }}/bin/restic-excludes {{ deploy_dir }}/ /var/spool/cron/ $@
+/usr/bin/restic backup --exclude-file {{ deploy_dir }}/bin/restic-excludes {{ deploy_dir }}/ /var/lib/radicale/ /var/spool/cron/ $@
