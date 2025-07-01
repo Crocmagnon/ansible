@@ -5,6 +5,7 @@
 - import_playbook: caddy.yaml # noqa: name[play]
 - import_playbook: postgresql-client.yaml # noqa: name[play]
 - import_playbook: rclone.yaml # noqa: name[play]
+- import_playbook: rclone-mount-vps.yaml # noqa: name[play]
 - import_playbook: simple-packages.yaml # noqa: name[play]
 - import_playbook: syncthing.yaml # noqa: name[play]
 - import_playbook: tailscale.yaml # noqa: name[play]
