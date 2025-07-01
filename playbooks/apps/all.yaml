@@ -4,6 +4,7 @@
 - import_playbook: caddy-vps.yaml # noqa: name[play]
 # - import_playbook: code.yaml # noqa: name[play]
 - import_playbook: ftp.yaml # noqa: name[play]
+- import_playbook: immich.yaml # noqa: name[play]
 - import_playbook: lyon-transports.yaml # noqa: name[play]
 # - import_playbook: manuels.yaml # noqa: name[play]
 - import_playbook: media.yaml # noqa: name[play]

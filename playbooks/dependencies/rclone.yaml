@@ -12,10 +12,35 @@
         path: "{{ ansible_env.HOME }}/.config/rclone/"
         state: directory
         mode: "0775"
-    - name: Write rclone.conf
+
+    - name: Create rclone config docker plugin
+      become: true
+      ansible.builtin.file:
+        path: "/var/lib/docker-plugins/rclone/config"
+        state: directory
+        mode: "0755"
+    - name: Create rclone cache docker plugin
+      become: true
+      ansible.builtin.file:
+        path: "/var/lib/docker-plugins/rclone/cache"
+        state: directory
+        mode: "0755"
+    - name: Install rclone docker plugin
+      community.docker.docker_plugin:
+        plugin_name: rclone/docker-volume-rclone:amd64
+        state: enable
+        alias: rclone
+
+    - name: Write rclone.conf to user
       ansible.builtin.template:
         src: templates/rclone/rclone.conf.j2
         dest: "{{ ansible_env.HOME }}/.config/rclone/rclone.conf"
+        mode: "0600"
+    - name: Write rclone.conf to docker
+      become: true
+      ansible.builtin.template:
+        src: templates/rclone/rclone.conf.j2
+        dest: "/var/lib/docker-plugins/rclone/config/rclone.conf"
         mode: "0600"
   vars:
     rclone_pcloud_gab_access_token: !vault |
