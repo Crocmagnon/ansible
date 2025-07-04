@@ -1,0 +1,9 @@
+services:
+  fmd:
+    image: registry.gitlab.com/fmd-foss/fmd-server:v0.11.0
+    ports:
+      - "127.0.0.1:9006:8080"
+    volumes:
+      - "./data/db/:/var/lib/fmd-server/db/"
+      - "./config.yml:/etc/fmd-server/config.yml:ro"
+    restart: unless-stopped
