@@ -19,6 +19,8 @@ services:
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - ovh-immich:/usr/src/app/upload
+      - pcloud-gab-root:/mnt/media/pcloud-gab:ro
+      - pcloud-claire:/mnt/media/pcloud-claire:ro
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -83,6 +85,20 @@ volumes:
     driver: rclone
     driver_opts:
       remote: 'ovh-immich:immich-gaugendre'
+      allow_other: 'true'
+      vfs_cache_mode: writes
+      poll_interval: 0
+  pcloud-gab-root:
+    driver: rclone
+    driver_opts:
+      remote: 'pcloud-gab:/'
+      allow_other: 'true'
+      vfs_cache_mode: writes
+      poll_interval: 0
+  pcloud-claire:
+    driver: rclone
+    driver_opts:
+      remote: 'pcloud-claire:/'
       allow_other: 'true'
       vfs_cache_mode: writes
       poll_interval: 0
